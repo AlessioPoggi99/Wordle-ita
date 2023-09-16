@@ -12,9 +12,10 @@ interface GuessRow {
 
 interface GameStoreState {
     answer: string
-    rows: GuessRow[]
+    rows: Array<GuessRow>
+    currentRow: number
     gameState: 'playing' | 'won' | 'lost'
-    updateRows(rows: GuessRow[]): void
+    updateRow(row: GuessRow): void
     newGame(initialGuess?: GuessRow[]): void
 }
 
@@ -28,23 +29,39 @@ interface StatisticsStoreState {
 
 export const useGameStore = create<GameStoreState>()(
 	persist(
-		(set) => ({
+		(set, get) => ({
 			answer: getRandomWord(),
-            rows: [],
+            rows: Array(NUMBER_OF_GUESSES).fill(''),
+            currentRow: 0,
             gameState: 'playing',
-            //updateRows: (rows) => set({ rows: rows }),
-            updateRows: (rows) => {
-                const didWin = rows[rows.length-1].result?.every(res => res === LetterState.Match)
-                set ({ 
+            updateRow: (row) => {
+                const rows = get().rows
+                let didWin = false
+                let currentRow = get().currentRow
+                rows[currentRow] = row
+                
+                if(row.result && row.result.length == WORD_LENGTH) {
+                    didWin = row.result.every(res => res === LetterState.Match)
+                    currentRow += 1
+                }
+
+                set ({
                     rows: rows,
-                    gameState: didWin ? 'won' : rows.length === NUMBER_OF_GUESSES ? 'lost' : 'playing'
+                    currentRow: currentRow,
+                    gameState: didWin ? 'won' : currentRow >= NUMBER_OF_GUESSES ? 'lost' : 'playing',
                 })
             },
-            newGame: (initialRows = []) => set({ 
-                gameState: 'playing',
-                answer: getRandomWord(),
-                rows: initialRows,
-            }),
+            newGame: (initialRows = []) => {
+                const rowsToAdd = NUMBER_OF_GUESSES - initialRows.length
+                initialRows = initialRows.concat(Array(rowsToAdd).fill(''))
+
+                set({
+                    gameState: 'playing',
+                    answer: getRandomWord(),
+                    rows: initialRows,
+                    currentRow: 0,
+                })
+            },
 		}),
 		{
 			name: 'wordle-game-storage', // unique name

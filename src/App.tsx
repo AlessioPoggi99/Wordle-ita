@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useGameStore, useStatisticsStore, NUMBER_OF_GUESSES, WORD_LENGTH } from './hooks/useStore'
+import { useGameStore, useStatisticsStore, WORD_LENGTH } from './hooks/useStore'
 import useGuess from './hooks/useGuess'
 import usePrevious from './hooks/usePrevious'
-import { LetterState, computeGuess, isValidWord } from './word-utils'
+import { computeGuess, isValidWord } from './word-utils'
 import WordRow from './WordRow'
 import GameOver from './GameOver'
 
@@ -20,35 +20,18 @@ export default function App() {
         if (guess.length === 0 && previousGuess?.length === WORD_LENGTH) {
             if (isValidWord(previousGuess)) {
                 setInvalidGuess(false)
-                addGuess(previousGuess)
+                const result = computeGuess(previousGuess, gameStore.answer)
+                gameStore.updateRow({ guess: previousGuess, result })
             } else {
                 setInvalidGuess(true)
                 setGuess(previousGuess)
             }
+        } else {
+            gameStore.updateRow({guess})
         }
     }, [guess])
 
-    const addGuess = (guess: string) => {
-        const result = computeGuess(guess, gameStore.answer)
-        const rows = gameStore.rows.concat({ guess, result })
-        gameStore.updateRows(rows)
-    }
-
-    /* GAME VARS */
-    const isGameOver = gameStore.gameState !== 'playing'
-
-    let rows = [...gameStore.rows]
-
-    let currentRow = 0
-
-    if (rows.length < NUMBER_OF_GUESSES) {
-        currentRow = rows.push({ guess }) - 1
-    }
-
-    const guessesRemaining = NUMBER_OF_GUESSES - rows.length
-
-    rows = rows.concat(Array(guessesRemaining).fill(''))
-
+    /* INVALID ANIMATION */
     const [showInvalidGuess, setInvalidGuess] = useState(false)
     useEffect(() => {
         const timer: ReturnType<typeof setTimeout> = setTimeout(() => setInvalidGuess(false), 600)
@@ -67,25 +50,17 @@ export default function App() {
 
         <main>
             <section className="grid grid-rows-6 gap-[5px] my-4 max-w-sm mx-auto px-4">
-                {rows.map((word, index) => (
+                {gameStore.rows.map((word, index) => (
                     <WordRow
                         key={index}
                         word={word.guess}
                         result={word.result}
-                        className={showInvalidGuess && index === currentRow ? 'animate-vibration' : ''}
+                        className={showInvalidGuess && index === gameStore.currentRow ? 'animate-vibration' : ''}
                     />
                 ))}
-                
-                {/*[...Array(NUMBER_OF_GUESSES - gameStore.rows.length).keys()].map((_, index) => (
-                    <WordRow
-                        key={index}
-                        word={''}
-                        className={showInvalidGuess && index === currentRow ? 'animate-vibration' : ''}
-                    />
-                ))*/}
             </section>
             <section>
-                {isGameOver && <GameOver />}
+                {gameStore.gameState !== 'playing' && <GameOver />}
             </section>
       </main>
     </div>
