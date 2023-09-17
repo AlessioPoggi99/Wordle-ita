@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
-import { WORD_LENGTH } from "./useStore";
+import { useState, useEffect } from "react"
+import { WORD_LENGTH } from "./useStore"
 
 export default function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>, (letter: string) => void] {
     const [guess, setGuess] = useState('')
 
     const addGuessLetter = (letter: string) => {
         setGuess((curGuess) => {
-            const newGuess =
-            letter.length === 1 && curGuess.length !== WORD_LENGTH ? curGuess + letter : curGuess
+            const newGuess = letter.length === 1 && curGuess.length !== WORD_LENGTH ? curGuess + letter : curGuess
 
             switch (letter) {
                 case 'Backspace':
@@ -27,11 +26,11 @@ export default function useGuess(): [string, React.Dispatch<React.SetStateAction
         const letter = e.key
         addGuessLetter(letter)
     }
-
+    
     useEffect(() => {
-        document.addEventListener('keydown', onKeyDown)
+        document.addEventListener('keydown', onKeyDown);
         return () => { document.removeEventListener('keydown', onKeyDown) }
     }, [])
-
-    return [guess, setGuess, addGuessLetter]
+    
+    return [guess, setGuess, addGuessLetter];
 }

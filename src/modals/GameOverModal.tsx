@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useGameStore, useStatisticsStore } from '../hooks/useStore'
+import { useGameStore, useStatisticsStore, useModalStore } from '../hooks/useStore'
 import WordRow from '../WordRow'
 
 interface GameOverModalProps {
@@ -9,6 +9,7 @@ interface GameOverModalProps {
 export default function GameOverModal({ show = false }: GameOverModalProps) {
     const gameStore = useGameStore()
     const statisticsStore = useStatisticsStore()
+    const modalStore = useModalStore()
 
     const [distribution, setDistribution] = useState<number[]>([])
     const [percentages, setPercentages] = useState<number[]>([])
@@ -92,6 +93,7 @@ export default function GameOverModal({ show = false }: GameOverModalProps) {
                 className="hover:scale-[1.03] font-bold text-base uppercase transition-all rounded bg-[#538d4e] p-2 mt-4 shadow w-full"
                 onClick={() => {
                     gameStore.newGame()
+                    modalStore.toggleGameOverModal(false)
                 }}
             >
                 New Game

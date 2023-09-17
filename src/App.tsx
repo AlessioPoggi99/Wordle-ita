@@ -20,6 +20,11 @@ export default function App() {
     const previousGuess = usePrevious(guess)
 
     useEffect(() => {
+        if(gameStore.gameState != 'playing') {
+            setGuess('')
+            return
+        }
+
         if (guess.length === 0 && previousGuess?.length === WORD_LENGTH) {
             if (isValidWord(previousGuess)) {
                 setInvalidGuess(false)
@@ -42,8 +47,6 @@ export default function App() {
     }, [showInvalidGuess])
 
     /* GAME OVER & STATISTICS UPDATE */
-    //const [showGameOverModal, setGameOverModal] = useState<boolean>(false)
-
     useEffect(() => {
         if(gameStore.gameState != 'playing') {
             const isWin = gameStore.gameState == 'won' ? true : false
@@ -52,9 +55,6 @@ export default function App() {
                 modalStore.toggleGameOverModal(true)
             }, 2000)
             return () => clearTimeout(timer)
-        } else {
-            modalStore.toggleGameOverModal(false)
-            setGuess('')
         }
     }, [gameStore.gameState])
 
