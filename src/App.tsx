@@ -8,7 +8,6 @@ import GameOverModal from './modals/GameOverModal'
 import Keyboard from './Keyboard'
 import Header from './Header'
 
-
 export default function App() {
     /* STORE HOOKS */
     const gameStore = useGameStore()

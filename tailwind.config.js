@@ -11,6 +11,8 @@ export default {
         jump: 'jump 1000ms infinite',
         pop: 'pop 100ms',
         flip: 'flip 1000ms ease-in infinite',
+        slidein: 'slidein 200ms',
+        slideout: 'slideout 200ms',
       },
       keyframes: {
         vibration: {
@@ -28,16 +30,25 @@ export default {
           '100%': { transform: 'translateY(0)' },
         },
         pop: {
-          'from': { transform: 'scale(0.8); opacity: 0' },
-          '40%': { transform: 'scale(1.1); opacity: 1' },
+          'from': { transform: 'scale(0.8)', opacity: '0' },
+          '40%': { transform: 'scale(1.1)', opacity: '1' },
         },
         flip: {
           '0%': { transform: 'rotateX(90deg)' },
           '50%': { transform: 'rotateX(-90deg)' },
           '100%': { transform: 'rotateX(0)' },
         },
+        slidein: {
+          '0%': { transform: 'translateY(30px)', opacity: '0' },
+          '100%': { transform: 'translateY(0px)', opacity: '1' },
+        },
+        slideout: {
+          '0%': { transform: 'translateY(0px)', opacity: '1' },
+          '90%': { opacity: '0' },
+          '100%': { transform: 'translateY(60px)', opacity: '0' },
+        },
       },
-    }
+    },
   },
   plugins: [],
 }

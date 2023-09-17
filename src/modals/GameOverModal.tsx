@@ -2,11 +2,7 @@ import { useEffect, useState } from 'react'
 import { useGameStore, useStatisticsStore, useModalStore } from '../hooks/useStore'
 import WordRow from '../WordRow'
 
-interface GameOverModalProps {
-    show: boolean
-}
-
-export default function GameOverModal({ show = false }: GameOverModalProps) {
+export default function GameOverModal({ show = false }: {show: boolean}) {
     const gameStore = useGameStore()
     const statisticsStore = useStatisticsStore()
     const modalStore = useModalStore()
@@ -26,7 +22,7 @@ export default function GameOverModal({ show = false }: GameOverModalProps) {
         const max = Math.max(...distribution)
 
         distribution.forEach((value, index) => {
-            percentages[index] = Math.floor(90 * value / max) + 10
+            percentages[index] = max == 0 ? 10 : Math.floor(90 * value / max) + 10
         })
 
         setDistribution(distribution)
@@ -39,7 +35,7 @@ export default function GameOverModal({ show = false }: GameOverModalProps) {
             className={`
                 absolute bg-[#2a2733] border border-zinc-600 rounded text-center sm:w-full w-[calc(100%-2rem)] max-w-md 
                 p-6 left-1/2 top-1/2 mx-auto translate-x-[-50%] translate-y-[calc(-50%-100vh)] flex flex-col items-center gap-y-8
-                pointer-events-none transition-all opacity-0 duration-300 ${show ? 'opacity-100 pointer-events-auto translate-y-[calc(-50%)]' : ''}`
+                pointer-events-none transition-all opacity-0 duration-300 ${show ? 'opacity-100 pointer-events-auto translate-y-[-50%]' : ''}`
             }
         >
             <section>
@@ -49,7 +45,7 @@ export default function GameOverModal({ show = false }: GameOverModalProps) {
                     className="items-center justify-items-center max-w-fit"
                 />
             </section>
-
+            
             <section>
                 <h3 className='font-bold text-lg uppercase mb-2'>STATISTICHE</h3>
                 <div className='grid grid-cols-4 justify-center items-start'>
@@ -58,7 +54,9 @@ export default function GameOverModal({ show = false }: GameOverModalProps) {
                         <p className='font-light text-sm'>Partite</p>
                     </div>
                     <div className='flex flex-col justify-center items-center'>
-                        <h1 className='font-extrabold text-4xl'>{Math.floor(statisticsStore.wins / statisticsStore.matches * 100)}</h1>
+                        <h1 className='font-extrabold text-4xl'>{
+                            statisticsStore.matches > 0 ? Math.floor(statisticsStore.wins / statisticsStore.matches * 100) : 0
+                        }</h1>
                         <p className='font-light text-sm'>% Vittorie</p>
                     </div>
                     <div className='flex flex-col justify-center items-center'>
