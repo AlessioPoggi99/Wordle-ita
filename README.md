@@ -34,7 +34,7 @@ $PROJECT_ROOT
 ## How to try it
 
 You can try this unofficial version of Wordle on the website:
-- <a href="" target="_blank">Wordle-ita 🇮🇹</a>
+- <a href="https://alessiopoggi99.github.io/Wordle-ita/" target="_blank">Wordle-ita 🇮🇹</a>
 
 Otherwise you can clone the <a href="https://github.com/AlessioPoggi99/Wordle-ita" target="_blank">Github repository</a> and run it on your pc
 ```sh
