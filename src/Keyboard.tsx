@@ -20,16 +20,16 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
     }
 
     return (
-        <div className={`flex flex-col`}>
+        <div className={`flex flex-col pb-2`}>
             {keyboardKeys.map((keyboardRow, rowIndex) => (
-                <div key={rowIndex} className="my-2 flex justify-center space-x-1">
+                <div key={rowIndex} className="my-1 flex justify-center space-x-1">
                     {keyboardRow.map((key, index) => {
-                        let styles = 'rounded font-bold uppercase flex-1 py-2'
+                        let styles = 'rounded font-bold uppercase flex-1 py-3 transition-all delay-[1500ms]'
 
                         const letterState = keyStateStyles[keyboardLetterState[key]]
 
                         if (letterState) {
-                            styles += ' text-white px-1 ' + letterState
+                            styles += ' text-white px-2 ' + letterState
                         } else if (key !== '') {
                             styles += ' bg-[#818384]'
                         }
@@ -37,11 +37,11 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
                         if (key === '') {
                             styles += ' pointer-events-none'
                         } else {
-                            styles += ' px-1'
+                            styles += ' px-2'
                         }
 
                         return (
-                            <button onClick={onClick} key={key + index} className={styles}>
+                            <button onClick={onClick} key={key + index} className={styles} style={{textAlign: 'center', textAlign: '-webkit-center'}}>
                                 {key === 'delete' ? backspace : key}
                             </button>
                         )
@@ -61,7 +61,7 @@ const keyStateStyles = {
 const keyboardKeys = [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
     ['', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ''],
-    ['Enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'delete'],
+    ['Go', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'delete'],
 ]
 
 const backspace = (

@@ -13,6 +13,7 @@ export default function useGuess(): [string, React.Dispatch<React.SetStateAction
                 case 'Backspace':
                     return newGuess.slice(0, -1);
                 case 'Enter':
+                case 'Go':
                     if (newGuess.length === WORD_LENGTH) {
                         return ''
                     }

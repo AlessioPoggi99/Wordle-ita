@@ -64,7 +64,7 @@ export default function App() {
             <Header />
 
             <section className=''>
-                <div className="grid grid-rows-6 gap-[5px] max-w-sm mx-auto p-4">
+                <div className="grid grid-rows-6 gap-[5px] max-w-sm mx-auto px-4 py-2">
                     {gameStore.rows.map((word, index) => (
                         <WordRow
                             key={index}
