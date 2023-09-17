@@ -11,7 +11,6 @@ export default {
         jump: 'jump 1000ms infinite',
         pop: 'pop 100ms',
         flip: 'flip 1000ms ease-in infinite',
-        buttonHover: 'buttonHover 250ms',
       },
       keyframes: {
         vibration: {

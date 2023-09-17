@@ -4,7 +4,7 @@ import useGuess from './hooks/useGuess'
 import usePrevious from './hooks/usePrevious'
 import { computeGuess, isValidWord } from './word-utils'
 import WordRow from './WordRow'
-import GameOver from './GameOver'
+import GameOverModal from './modals/GameOverModal'
 
 
 export default function App() {
@@ -39,7 +39,7 @@ export default function App() {
     }, [showInvalidGuess])
 
     /* GAME OVER & STATISTICS UPDATE */
-    const [showGameOverModal, setGameOverModal] = useState(false)
+    const [showGameOverModal, setGameOverModal] = useState<boolean>(false)
 
     useEffect(() => {
         if(gameStore.gameState != 'playing') {
@@ -77,7 +77,8 @@ export default function App() {
                 ))}
             </section>
             <section>
-                {showGameOverModal ? <GameOver /> : ''}
+                {/*showGameOverModal ? <GameOver /> : ''*/}
+                <GameOverModal show={showGameOverModal} />
             </section>
       </main>
     </div>

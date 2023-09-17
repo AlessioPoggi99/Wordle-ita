@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useGameStore, useStatisticsStore } from './hooks/useStore'
-import WordRow from './WordRow'
+import { useGameStore, useStatisticsStore } from '../hooks/useStore'
+import WordRow from '../WordRow'
 
-export default function GameOver() {
+interface GameOverModalProps {
+    show: boolean
+}
+
+export default function GameOverModal({ show = false }: GameOverModalProps) {
     const gameStore = useGameStore()
     const statisticsStore = useStatisticsStore()
 
@@ -32,13 +36,16 @@ export default function GameOver() {
     return (
         <div 
             role="modal"
-            className="absolute bg-[#2a2733] border border-zinc-600 rounded text-center sm:w-full w-[calc(100%-2rem)] max-w-md p-6
-                left-1/2 top-1/2 mx-auto translate-x-[-50%] translate-y-[-50%] flex flex-col items-center gap-y-8"
+            className={`
+                absolute bg-[#2a2733] border border-zinc-600 rounded text-center sm:w-full w-[calc(100%-2rem)] max-w-md 
+                p-6 left-1/2 top-1/2 mx-auto translate-x-[-50%] translate-y-[calc(-50%-100vh)] flex flex-col items-center gap-y-8
+                pointer-events-none transition-all opacity-0 duration-300 ${show ? 'opacity-100 pointer-events-auto translate-y-[calc(-50%)]' : ''}`
+            }
         >
             <section>
                 <h3 className='font-bold text-lg uppercase mb-2'>{gameStore.gameState == 'won' ? 'vittoria' : 'sconfitta'}</h3>
                 <WordRow
-                    word={gameStore.answer}
+                    word={statisticsStore.lastSaved.answer}
                     className="items-center justify-items-center max-w-fit"
                 />
             </section>
@@ -72,7 +79,7 @@ export default function GameOver() {
                         <div className='grid grid-cols-[1rem_1fr] gap-x-2' key={index}>
                             <p className='text-sm'>{index + 1}</p>
                             <div 
-                                className='bg-zinc-600 text-sm font-semibold text-right pr-2'
+                                className='bg-zinc-600 text-sm font-semibold text-right pr-2 rounded-e'
                                 style={{width: `${value}%`}}
                             >
                                 {distribution[index]}

@@ -100,7 +100,7 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
                 ) : (
                     state.winInRowRecord < state.winInRow ? state.winInRow : state.winInRowRecord
                 ),
-                winInRow: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? state.winInRow + 1 : 0,
+                winInRow: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) ? isWin ? state.winInRow + 1 : 0 : state.winInRow,
                 winAttemptsArr: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? [...state.winAttemptsArr, attempts] : state.winAttemptsArr,
                 lastSaved: {answer, attempts},
             })),
