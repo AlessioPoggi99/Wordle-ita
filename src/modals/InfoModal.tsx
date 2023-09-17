@@ -12,6 +12,7 @@ export default function InfoModal({ show = false }: {show: boolean}) {
                 <h1 className="text-xl font-bold text-center uppercase">Come giocare</h1>
                 <img 
                     src='/images/xmark-solid.svg' 
+                    alt='close button'
                     className='absolute right-0 w-5 h-5 cursor-pointer hover:invert duration-300'
                     onClick={() => { modalStore.toggleInfoModal(false) }}
                 />
