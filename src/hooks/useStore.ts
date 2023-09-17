@@ -83,8 +83,10 @@ export const useGameStore = create<GameStoreState>()(
                                 case LetterState.Present:
                                     if (r === LetterState.Miss) {
                                         break
+                                    } else {
+                                        keyboardLetterState[resultGuessLetter] = r
+                                        break
                                     }
-                                // eslint-disable-next-line no-fallthrough
                                 default:
                                     keyboardLetterState[resultGuessLetter] = r
                                     break

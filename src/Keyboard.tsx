@@ -24,7 +24,7 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
             {keyboardKeys.map((keyboardRow, rowIndex) => (
                 <div key={rowIndex} className="my-1 flex justify-center space-x-1">
                     {keyboardRow.map((key, index) => {
-                        let styles = 'rounded font-bold uppercase flex-1 py-3'
+                        let styles = 'keyboardButton rounded font-bold uppercase flex-1 py-3 text-center'
 
                         const letterState = keyStateStyles[keyboardLetterState[key]]
                         if(letterState) styles += ' transition-all delay-[1500ms]'
@@ -42,7 +42,7 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
                         }
 
                         return (
-                            <button onClick={onClick} key={key + index} className={styles} style={{textAlign: 'center', textAlign: '-webkit-center'}}>
+                            <button onClick={onClick} key={key + index} className={styles}>
                                 {key === 'delete' ? backspace : key}
                             </button>
                         )
