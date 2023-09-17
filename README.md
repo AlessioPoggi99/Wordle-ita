@@ -1,27 +1,43 @@
-# React + TypeScript + Vite
+# Wordle-ita 🇮🇹
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Unofficial Italian fan-made version of <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank">Wordle</a>
 
-Currently, two official plugins are available:
+You have six attempts to guess a five-letter word, with feedback given for each guess in the form of colored tiles indicating when letters match or occupy the correct position.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Stack
+- <a href="https://vitejs.dev" target="_blank">Vite.js</a> - A local development server and used by default by Vue and for React project templates
+- <a href="https://react.dev" target="_blank">React.js</a> - A front-end JavaScript library
+- <a href="https://zustand-demo.pmnd.rs" target="_blank">Zustand</a> - A small, fast and scalable bearbones state-management solution
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+## Project structure
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```sh
+$PROJECT_ROOT
+│   # Front-end files
+├── src
+│   │   # Json files (italian dictionary)
+│   ├── dict
+│   │   # React custom hooks
+│   ├── hooks
+│   │   # React components used as modals
+│   ├── modals
+│   │   # App.tsx and main components
+│   └── *
+│
+│   # Static files for images and icons file
+└── public
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## How to try it
+
+You can try this unofficial app of Mijnlieff game on the website:
+- <a href="" target="_blank">Wordle-ita 🇮🇹</a>
+
+Otherwise you can clone the <a href="https://github.com/AlessioPoggi99/Wordle-ita" target="_blank">Github repository</a> and run it on your pc
+```sh
+yarn
+yarn dev
+```
