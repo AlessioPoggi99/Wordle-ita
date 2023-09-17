@@ -2,6 +2,7 @@ import WordRow from "../WordRow"
 import { useModalStore } from "../hooks/useStore"
 import { LetterState } from "../word-utils"
 import FullScreenModal from "./FullScreenModal"
+import XmarkIcon from '../assets/xmark.svg'
 
 export default function InfoModal({ show = false }: {show: boolean}) {
     const modalStore = useModalStore()
@@ -11,7 +12,7 @@ export default function InfoModal({ show = false }: {show: boolean}) {
             <header className="relative flex justify-center items-center py-4">
                 <h1 className="text-xl font-bold text-center uppercase">Come giocare</h1>
                 <img 
-                    src='./assets/xmark-solid.svg' 
+                    src={XmarkIcon}
                     alt='close button'
                     className='absolute right-0 w-5 h-5 cursor-pointer hover:invert duration-300'
                     onClick={() => { modalStore.toggleInfoModal(false) }}

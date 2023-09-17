@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useModalStore, useStatisticsStore, useSettingsStore, useGameStore } from "../hooks/useStore"
 import FullScreenModal from "./FullScreenModal"
 import Switch from "react-switch"
+import XmarkIcon from '../assets/xmark.svg'
+import TrashIcon from '../assets/trash.svg'
 
 export default function SettingsModal({ show = false }: {show: boolean}) {
     const gameStore = useGameStore()
@@ -15,7 +17,7 @@ export default function SettingsModal({ show = false }: {show: boolean}) {
             <header className="relative flex justify-center items-center py-4">
                 <h1 className="text-xl font-bold text-center uppercase">Impostazioni</h1>
                 <img 
-                    src='./assets/xmark-solid.svg' 
+                    src={XmarkIcon}
                     alt="close button"
                     className='absolute right-0 w-5 h-5 cursor-pointer hover:invert duration-300'
                     onClick={() => { modalStore.toggleSettingsModal(false) }}
@@ -40,7 +42,7 @@ export default function SettingsModal({ show = false }: {show: boolean}) {
                 <div className="flex justify-between items-center pb-4 border-b border-zinc-600">
                     <p>Elimina statistiche</p>
                     <img 
-                        src='./assets/trash-can-solid.svg' 
+                        src={TrashIcon}
                         alt="delete statistics button"
                         className='w-5 h-5 cursor-pointer duration-300' 
                         onClick={() => {
