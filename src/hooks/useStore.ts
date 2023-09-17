@@ -30,6 +30,15 @@ interface StatisticsStoreState {
     addMatch(answer: string, isWin: boolean, attempts: number): void
 }
 
+type ModalStore = {
+    showGameOverModal: boolean
+    showSettingsModal: boolean
+    showInfoModal: boolean
+    toggleGameOverModal: (show?: boolean) => void
+    toggleSettingsModal: (show?: boolean) => void
+    toggleInfoModal: (show?: boolean) => void
+}
+
 export const useGameStore = create<GameStoreState>()(
 	persist(
 		(set, get) => ({
@@ -133,4 +142,15 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
 			storage: createJSONStorage(() => localStorage),
 		}
 	)
+)
+
+export const useModalStore = create<ModalStore>()(
+    (set) => ({
+        showGameOverModal: false,
+        showSettingsModal: false,
+        showInfoModal: false,
+        toggleGameOverModal: (show) => set((state) => ({ showGameOverModal: show ? show : !state.showGameOverModal })),
+        toggleSettingsModal: (show) => set((state) => ({ showGameOverModal: show ? show : !state.showGameOverModal })),
+        toggleInfoModal: (show) => set((state) => ({ showGameOverModal: show ? show : !state.showGameOverModal })),
+    }),
 )

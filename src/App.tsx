@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useGameStore, useStatisticsStore, WORD_LENGTH } from './hooks/useStore'
+import { useGameStore, useStatisticsStore, useModalStore, WORD_LENGTH } from './hooks/useStore'
 import useGuess from './hooks/useGuess'
 import usePrevious from './hooks/usePrevious'
 import { computeGuess, isValidWord } from './word-utils'
@@ -13,6 +13,7 @@ export default function App() {
     /* STORE HOOKS */
     const gameStore = useGameStore()
     const statisticsStore = useStatisticsStore()
+    const modalStore = useModalStore()
 
     /* GUESS HOOK */
     const [guess, setGuess, addGuessLetter] = useGuess()
@@ -41,18 +42,18 @@ export default function App() {
     }, [showInvalidGuess])
 
     /* GAME OVER & STATISTICS UPDATE */
-    const [showGameOverModal, setGameOverModal] = useState<boolean>(false)
+    //const [showGameOverModal, setGameOverModal] = useState<boolean>(false)
 
     useEffect(() => {
         if(gameStore.gameState != 'playing') {
             const isWin = gameStore.gameState == 'won' ? true : false
             statisticsStore.addMatch(gameStore.answer, isWin, gameStore.currentRow)
             const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
-                setGameOverModal(true)
+                modalStore.toggleGameOverModal(true)
             }, 2000)
             return () => clearTimeout(timer)
         } else {
-            setGameOverModal(false)
+            modalStore.toggleGameOverModal(false)
             setGuess('')
         }
     }, [gameStore.gameState])
@@ -80,7 +81,7 @@ export default function App() {
                 <Keyboard onClick={(key) => { addGuessLetter(key) }}/>
             </section>
 
-            <GameOverModal show={showGameOverModal} />
+            <GameOverModal show={modalStore.showGameOverModal} />
 
         </div>
     )

@@ -24,9 +24,10 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
             {keyboardKeys.map((keyboardRow, rowIndex) => (
                 <div key={rowIndex} className="my-1 flex justify-center space-x-1">
                     {keyboardRow.map((key, index) => {
-                        let styles = 'rounded font-bold uppercase flex-1 py-3 transition-all delay-[1500ms]'
+                        let styles = 'rounded font-bold uppercase flex-1 py-3'
 
                         const letterState = keyStateStyles[keyboardLetterState[key]]
+                        if(letterState) styles += ' transition-all delay-[1500ms]'
 
                         if (letterState) {
                             styles += ' text-white px-2 ' + letterState
