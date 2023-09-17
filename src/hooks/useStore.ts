@@ -15,6 +15,7 @@ interface GameStoreState {
     rows: Array<GuessRow>
     currentRow: number
     gameState: 'playing' | 'won' | 'lost'
+    keyboardLetterState: { [letter: string]: LetterState }
     updateRow(row: GuessRow): void
     newGame(initialGuess?: GuessRow[]): void
 }
@@ -36,11 +37,13 @@ export const useGameStore = create<GameStoreState>()(
             rows: Array(NUMBER_OF_GUESSES).fill(''),
             currentRow: 0,
             gameState: 'playing',
+            keyboardLetterState: {},
             updateRow: (row) => {
                 const rows = get().rows
                 let didWin = false
                 let currentRow = get().currentRow
                 let gameState = get().gameState
+                const keyboardLetterState = get().keyboardLetterState
 
                 if(currentRow >= NUMBER_OF_GUESSES || gameState != 'playing')
                     return
@@ -52,7 +55,25 @@ export const useGameStore = create<GameStoreState>()(
 
                 for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
                     const result = rows[i].result
-                    if(result) didWin = result.every(res => res === LetterState.Match)
+                    if(result) {
+                        didWin = result.every(r => r === LetterState.Match)
+                        result.forEach((r, index) => {
+                            const resultGuessLetter = rows[i].guess[index]
+                            const currentLetterState = keyboardLetterState[resultGuessLetter]
+                            switch (currentLetterState) {
+                                case LetterState.Match:
+                                    break
+                                case LetterState.Present:
+                                    if (r === LetterState.Miss) {
+                                        break
+                                    }
+                                // eslint-disable-next-line no-fallthrough
+                                default:
+                                    keyboardLetterState[resultGuessLetter] = r
+                                    break
+                            }
+                        })
+                    }
                     if(didWin) break
                 }
 
@@ -62,6 +83,7 @@ export const useGameStore = create<GameStoreState>()(
                     rows: rows,
                     currentRow: currentRow,
                     gameState: gameState,
+                    keyboardLetterState: keyboardLetterState,
                 })
             },
             newGame: (initialRows = []) => {
@@ -73,6 +95,7 @@ export const useGameStore = create<GameStoreState>()(
                     answer: getRandomWord(),
                     rows: initialRows,
                     currentRow: 0,
+                    keyboardLetterState: {},
                 })
             },
 		}),

@@ -5,6 +5,8 @@ import usePrevious from './hooks/usePrevious'
 import { computeGuess, isValidWord } from './word-utils'
 import WordRow from './WordRow'
 import GameOverModal from './modals/GameOverModal'
+import Keyboard from './Keyboard'
+import Header from './Header'
 
 
 export default function App() {
@@ -57,30 +59,29 @@ export default function App() {
 
     /* APP TSX */
     return (
-        <div className='mx-auto h-screen max-w-lg px-4'>
+        <div className='flex flex-col justify-between mx-auto max-w-lg px-4 h-[100svh]'>
 
-        <header className="flex justify-between items-center border-b border-zinc-600 py-4">
-            <img src='/images/chart-simple-solid.svg' className='w-5 h-5 cursor-pointer hover:invert duration-300'/>
-            <h1 className="text-3xl font-bold text-center uppercase">🇮🇹 Wordle 🇮🇹</h1>
-            <img src='/images/gear-solid.svg' className='w-5 h-5 cursor-pointer hover:invert duration-300'/>
-        </header>
+            <Header />
 
-        <main>
-            <section className="grid grid-rows-6 gap-[5px] my-4 max-w-sm mx-auto px-4">
-                {gameStore.rows.map((word, index) => (
-                    <WordRow
-                        key={index}
-                        word={word.guess}
-                        result={word.result}
-                        className={showInvalidGuess && index === gameStore.currentRow ? 'animate-vibration' : ''}
-                    />
-                ))}
+            <section className=''>
+                <div className="grid grid-rows-6 gap-[5px] max-w-sm mx-auto p-4">
+                    {gameStore.rows.map((word, index) => (
+                        <WordRow
+                            key={index}
+                            word={word.guess}
+                            result={word.result}
+                            className={showInvalidGuess && index === gameStore.currentRow ? 'animate-vibration' : ''}
+                        />
+                    ))}
+                </div>
             </section>
-            <section>
-                {/*showGameOverModal ? <GameOver /> : ''*/}
-                <GameOverModal show={showGameOverModal} />
+
+            <section className=''>
+                <Keyboard onClick={(key) => { addGuessLetter(key) }}/>
             </section>
-      </main>
-    </div>
-  )
+
+            <GameOverModal show={showGameOverModal} />
+
+        </div>
+    )
 }

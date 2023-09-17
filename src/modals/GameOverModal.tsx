@@ -28,10 +28,9 @@ export default function GameOverModal({ show = false }: GameOverModalProps) {
             percentages[index] = Math.floor(90 * value / max) + 10
         })
 
-        console.log(percentages)
         setDistribution(distribution)
         setPercentages(percentages)
-    }, [])
+    }, [statisticsStore.winAttemptsArr])
 
     return (
         <div 
