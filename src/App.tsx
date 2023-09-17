@@ -14,7 +14,7 @@ export default function App() {
 
     /* GUESS HOOK */
     const [guess, setGuess, addGuessLetter] = useGuess()
-    const previousGuess = usePrevious(guess);
+    const previousGuess = usePrevious(guess)
 
     useEffect(() => {
         if (guess.length === 0 && previousGuess?.length === WORD_LENGTH) {
@@ -38,14 +38,31 @@ export default function App() {
         return () => clearTimeout(timer)
     }, [showInvalidGuess])
 
+    /* GAME OVER & STATISTICS UPDATE */
+    const [showGameOverModal, setGameOverModal] = useState(false)
+
+    useEffect(() => {
+        if(gameStore.gameState != 'playing') {
+            const isWin = gameStore.gameState == 'won' ? true : false
+            statisticsStore.addMatch(gameStore.answer, isWin, gameStore.currentRow)
+            const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
+                setGameOverModal(true)
+            }, 2000)
+            return () => clearTimeout(timer)
+        } else {
+            setGameOverModal(false)
+            setGuess('')
+        }
+    }, [gameStore.gameState])
+
     /* APP TSX */
     return (
         <div className='mx-auto h-screen max-w-lg px-4'>
 
         <header className="flex justify-between items-center border-b border-zinc-600 py-4">
-            <img src='/images/chart-simple-solid.svg' className='w-5 h-5'/>
+            <img src='/images/chart-simple-solid.svg' className='w-5 h-5 cursor-pointer hover:invert duration-300'/>
             <h1 className="text-3xl font-bold text-center uppercase">🇮🇹 Wordle 🇮🇹</h1>
-            <img src='/images/gear-solid.svg' className='w-5 h-5'/>
+            <img src='/images/gear-solid.svg' className='w-5 h-5 cursor-pointer hover:invert duration-300'/>
         </header>
 
         <main>
@@ -60,7 +77,7 @@ export default function App() {
                 ))}
             </section>
             <section>
-                {gameStore.gameState !== 'playing' && <GameOver />}
+                {showGameOverModal ? <GameOver /> : ''}
             </section>
       </main>
     </div>

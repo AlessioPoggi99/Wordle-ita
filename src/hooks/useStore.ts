@@ -24,7 +24,9 @@ interface StatisticsStoreState {
     wins: number
     winInRow: number
     winInRowRecord: number
-    addMatch(isWin: boolean): void
+    winAttemptsArr: number[]
+    lastSaved: {answer: string, attempts: number}
+    addMatch(answer: string, isWin: boolean, attempts: number): void
 }
 
 export const useGameStore = create<GameStoreState>()(
@@ -38,17 +40,28 @@ export const useGameStore = create<GameStoreState>()(
                 const rows = get().rows
                 let didWin = false
                 let currentRow = get().currentRow
+                let gameState = get().gameState
+
+                if(currentRow >= NUMBER_OF_GUESSES || gameState != 'playing')
+                    return
+
                 rows[currentRow] = row
                 
-                if(row.result && row.result.length == WORD_LENGTH) {
-                    didWin = row.result.every(res => res === LetterState.Match)
+                if(row.result && row.result.length == WORD_LENGTH)
                     currentRow += 1
+
+                for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
+                    const result = rows[i].result
+                    if(result) didWin = result.every(res => res === LetterState.Match)
+                    if(didWin) break
                 }
+
+                gameState = didWin ? 'won' : currentRow >= NUMBER_OF_GUESSES ? 'lost' : 'playing'
 
                 set ({
                     rows: rows,
                     currentRow: currentRow,
-                    gameState: didWin ? 'won' : currentRow >= NUMBER_OF_GUESSES ? 'lost' : 'playing',
+                    gameState: gameState,
                 })
             },
             newGame: (initialRows = []) => {
@@ -77,15 +90,19 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
             wins: 0,
             winInRow: 0,
             winInRowRecord: 0,
-            addMatch: (isWin) => set((state) => ({ 
-                matches: state.matches + 1,
-                wins: isWin ? state.wins + 1 : state.wins,
-                winInRowRecord: isWin ? (
+            winAttemptsArr: [],
+            lastSaved: {answer: '', attempts: 0},
+            addMatch: (answer, isWin, attempts) => set((state) => ({ 
+                matches: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) ? state.matches + 1 : state.matches,
+                wins: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? state.wins + 1 : state.wins,
+                winInRowRecord: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? (
                     state.winInRowRecord < state.winInRow + 1 ? state.winInRow + 1 : state.winInRowRecord
                 ) : (
                     state.winInRowRecord < state.winInRow ? state.winInRow : state.winInRowRecord
                 ),
-                winInRow: isWin ? state.winInRow + 1 : 0,
+                winInRow: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? state.winInRow + 1 : 0,
+                winAttemptsArr: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? [...state.winAttemptsArr, attempts] : state.winAttemptsArr,
+                lastSaved: {answer, attempts},
             })),
 		}),
 		{

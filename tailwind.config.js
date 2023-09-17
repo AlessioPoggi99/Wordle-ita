@@ -10,8 +10,8 @@ export default {
         vibration: 'vibration 600ms infinite',
         jump: 'jump 1000ms infinite',
         pop: 'pop 100ms',
-        flipin: 'flipin 250ms ease-in',
-        flipout: 'flipout 250ms ease-in',
+        flip: 'flip 1000ms ease-in infinite',
+        buttonHover: 'buttonHover 250ms',
       },
       keyframes: {
         vibration: {
@@ -32,12 +32,9 @@ export default {
           'from': { transform: 'scale(0.8); opacity: 0' },
           '40%': { transform: 'scale(1.1); opacity: 1' },
         },
-        flipin: {
-          '0%': { transform: 'rotateX(0)' },
-          '100%': { transform: 'rotateX(-90deg)' },
-        },
-        flipout: {
-          '0%': { transform: 'rotateX(-90deg)' },
+        flip: {
+          '0%': { transform: 'rotateX(90deg)' },
+          '50%': { transform: 'rotateX(-90deg)' },
           '100%': { transform: 'rotateX(0)' },
         },
       },
