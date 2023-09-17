@@ -14,7 +14,7 @@ export default function SettingsModal({ show = false }: {show: boolean}) {
             <header className="relative flex justify-center items-center py-4">
                 <h1 className="text-xl font-bold text-center uppercase">Impostazioni</h1>
                 <img 
-                    src='/images/xmark-solid.svg' 
+                    src='./assets/xmark-solid.svg' 
                     alt="close button"
                     className='absolute right-0 w-5 h-5 cursor-pointer hover:invert duration-300'
                     onClick={() => { modalStore.toggleSettingsModal(false) }}
@@ -39,7 +39,7 @@ export default function SettingsModal({ show = false }: {show: boolean}) {
                 <div className="flex justify-between items-center pb-4 border-b border-zinc-600">
                     <p>Elimina statistiche</p>
                     <img 
-                        src='/images/trash-can-solid.svg' 
+                        src='./assets/trash-can-solid.svg' 
                         alt="delete statistics button"
                         className='w-5 h-5 cursor-pointer duration-300' 
                         onClick={() => statisticsStore.resetStatistics()}

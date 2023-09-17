@@ -17,6 +17,8 @@ You have six attempts to guess a five-letter word, with feedback given for each 
 $PROJECT_ROOT
 │   # Front-end files
 ├── src
+│   │   # Images and other assets
+│   ├── assets
 │   │   # Json files (italian dictionary)
 │   ├── dict
 │   │   # React custom hooks
@@ -26,7 +28,7 @@ $PROJECT_ROOT
 │   │   # App.tsx and main components
 │   └── *
 │
-│   # Static files for images and icons file
+│   # Static files
 └── public
 ```
 
