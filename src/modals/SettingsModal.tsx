@@ -1,9 +1,10 @@
 import { useState } from "react"
-import { useModalStore, useStatisticsStore, useSettingsStore } from "../hooks/useStore"
+import { useModalStore, useStatisticsStore, useSettingsStore, useGameStore } from "../hooks/useStore"
 import FullScreenModal from "./FullScreenModal"
 import Switch from "react-switch"
 
 export default function SettingsModal({ show = false }: {show: boolean}) {
+    const gameStore = useGameStore()
     const modalStore = useModalStore()
     const statisticsStore = useStatisticsStore()
     const settingsStore = useSettingsStore()
@@ -42,7 +43,10 @@ export default function SettingsModal({ show = false }: {show: boolean}) {
                         src='./assets/trash-can-solid.svg' 
                         alt="delete statistics button"
                         className='w-5 h-5 cursor-pointer duration-300' 
-                        onClick={() => statisticsStore.resetStatistics()}
+                        onClick={() => {
+                            gameStore.newGame()
+                            statisticsStore.resetStatistics()
+                        }}
                     />
                 </div>
                 <div className="flex justify-between items-center pb-4 border-b border-zinc-600">
