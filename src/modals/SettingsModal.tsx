@@ -1,19 +1,12 @@
 import { useState } from "react"
-import { useModalStore, useStatisticsStore } from "../hooks/useStore"
+import { useModalStore, useStatisticsStore, useSettingsStore } from "../hooks/useStore"
 import FullScreenModal from "./FullScreenModal"
 import Switch from "react-switch"
 
 export default function SettingsModal({ show = false }: {show: boolean}) {
     const modalStore = useModalStore()
     const statisticsStore = useStatisticsStore()
-
-    const handleThemeChange = (checked: boolean) => {
-        console.log('theme', checked)
-    }
-
-    const handleAnimationChange = (checked: boolean) => {
-        console.log('animation', checked)
-    }
+    const settingsStore = useSettingsStore()
 
     return (
         <FullScreenModal show={show}>
@@ -31,15 +24,15 @@ export default function SettingsModal({ show = false }: {show: boolean}) {
                 <div className="flex justify-between items-center pb-4 border-b border-zinc-600">
                     <p>Tema scuro</p>
                     <SwitchToggle 
-                        checked={true} 
-                        handleChange={handleThemeChange}
+                        checked={settingsStore.darkTheme} 
+                        handleChange={(checked) => settingsStore.toggleDarkTheme(checked)}
                     />
                 </div>
                 <div className="flex justify-between items-center pb-4 border-b border-zinc-600">
                     <p>Disattiva animazioni</p>
                     <SwitchToggle 
-                        checked={false} 
-                        handleChange={handleAnimationChange}
+                        checked={settingsStore.disableAnimations} 
+                        handleChange={(checked) => settingsStore.toggleDisableAnimations(checked)}
                     />
                 </div>
                 <div className="flex justify-between items-center pb-4 border-b border-zinc-600">

@@ -31,13 +31,20 @@ interface StatisticsStoreState {
     resetStatistics(): void
 }
 
-type ModalStore = {
+type ModalStoreState = {
     showGameOverModal: boolean
     showSettingsModal: boolean
     showInfoModal: boolean
     toggleGameOverModal: (showGameOverModal: boolean) => void
     toggleSettingsModal: (showSettingsModal: boolean) => void
     toggleInfoModal: (showInfoModal: boolean) => void
+}
+
+type SettingsStoreState = {
+    disableAnimations: boolean
+    darkTheme: boolean
+    toggleDarkTheme: (disableAnimations: boolean) => void
+    toggleDisableAnimations: (darkTheme: boolean) => void
 }
 
 export const useGameStore = create<GameStoreState>()(
@@ -152,7 +159,7 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
 	)
 )
 
-export const useModalStore = create<ModalStore>()(
+export const useModalStore = create<ModalStoreState>()(
     (set) => ({
         showGameOverModal: false,
         showSettingsModal: false,
@@ -162,3 +169,16 @@ export const useModalStore = create<ModalStore>()(
         toggleInfoModal: (showInfoModal) => set(() => ({ showInfoModal })),
     }),
 )
+
+export const useSettingsStore = create<SettingsStoreState>()(
+    persist((set) => ({
+        disableAnimations: false,
+        darkTheme: true,
+        toggleDisableAnimations: (disableAnimations) => set(() => ({ disableAnimations })),
+        toggleDarkTheme: (darkTheme) => set(() => ({ darkTheme })),
+    }),
+    {
+        name: 'wordle-settings-storage', // unique name
+        storage: createJSONStorage(() => localStorage),
+    }
+))
