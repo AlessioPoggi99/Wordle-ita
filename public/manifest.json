@@ -1,0 +1,10 @@
+{
+    "short_name": "Wordle 🇮🇹",
+    "name": "Wordle 🇮🇹",
+    "start_url": ".",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#242424",
+    "background_color": "#242424"
+  }
+  
