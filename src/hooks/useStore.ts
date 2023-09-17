@@ -28,6 +28,7 @@ interface StatisticsStoreState {
     winAttemptsArr: number[]
     lastSaved: {answer: string, attempts: number}
     addMatch(answer: string, isWin: boolean, attempts: number): void
+    resetStatistics(): void
 }
 
 type ModalStore = {
@@ -135,6 +136,13 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
                 winInRow: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) ? isWin ? state.winInRow + 1 : 0 : state.winInRow,
                 winAttemptsArr: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? [...state.winAttemptsArr, attempts] : state.winAttemptsArr,
                 lastSaved: {answer, attempts},
+            })),
+            resetStatistics: () => set(() => ({ 
+                matches: 0,
+                wins: 0,
+                winInRow: 0,
+                winInRowRecord: 0,
+                winAttemptsArr: [],
             })),
 		}),
 		{

@@ -7,6 +7,8 @@ import WordRow from './WordRow'
 import GameOverModal from './modals/GameOverModal'
 import Keyboard from './Keyboard'
 import Header from './Header'
+import InfoModal from './modals/InfoModal'
+import SettingsModal from './modals/SettingsModal'
 
 export default function App() {
     /* STORE HOOKS */
@@ -81,6 +83,8 @@ export default function App() {
             </section>
 
             <GameOverModal show={modalStore.showGameOverModal} />
+            <InfoModal show={modalStore.showInfoModal} />
+            <SettingsModal show={modalStore.showSettingsModal} />
 
         </div>
     )

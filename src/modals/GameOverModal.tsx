@@ -33,9 +33,9 @@ export default function GameOverModal({ show = false }: {show: boolean}) {
         <div 
             role="modal"
             className={`
-                absolute bg-[#2a2733] border border-zinc-600 rounded text-center sm:w-full w-[calc(100%-2rem)] max-w-md 
+                absolute bg-[#2a2733] border border-zinc-600 rounded text-center sm:w-full w-[calc(100%-2rem)] max-w-md
                 p-6 left-1/2 top-1/2 mx-auto translate-x-[-50%] translate-y-[calc(-50%-100vh)] flex flex-col items-center gap-y-8
-                pointer-events-none transition-all opacity-0 duration-300 ${show ? 'opacity-100 pointer-events-auto translate-y-[-50%]' : ''}`
+                pointer-events-none transition-all opacity-0 duration-300 ${show ? 'opacity-100 pointer-events-auto -translate-y-1/2' : ''}`
             }
         >
             <section>
