@@ -49,7 +49,7 @@ yarn dev
 
 ## Screenshots
 
-![](/public/screenshots/d-home.png?raw=true "Home screen") ![](/screenshots/d-gameover.png?raw=true "Game over")
-![](/screenshots/d-info.png?raw=true "Info screen") ![](/screenshots/d-settings.png?raw=true "Settings screen")
+![](/public/screenshots/d-home.png?raw=true "Home screen") ![](/public/screenshots/d-gameover.png?raw=true "Game over")
+![](/public/screenshots/d-info.png?raw=true "Info screen") ![](/public/screenshots/d-settings.png?raw=true "Settings screen")
 
-![](/screenshots/m-home.png?raw=true "Home screen") ![](/screenshots/m-gameover.png?raw=true "Game over") ![](/screenshots/m-info.png?raw=true "Info screen") ![](/screenshots/m-settings.png?raw=true "Settings screen")
+![](/public/screenshots/m-home.png?raw=true "Home screen") ![](/public/screenshots/m-gameover.png?raw=true "Game over") ![](/public/screenshots/m-info.png?raw=true "Info screen") ![](/public/screenshots/m-settings.png?raw=true "Settings screen")
