@@ -8,10 +8,16 @@
   -webkit-text-size-adjust: 100%;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  overflow-y: hidden; 
+}
 
+html.dark {
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-  overflow-y: hidden; 
+}
+html.light {
+  color: black;
+  background-color: #e3e3e1;
 }
 
 .keyboardButton {

@@ -1,22 +1,25 @@
 import { useEffect, useState } from 'react'
 import { WORD_LENGTH, useSettingsStore } from './hooks/useStore'
-import { LetterState } from './word-utils'
+import { LetterState } from './utils/wordUtils'
 
 interface WordRowProps {
-  word: string;
-  result?: LetterState[];
-  className?: string;
+  word: string
+  result?: LetterState[]
+  className?: string
+  disableAnimations?: boolean
 }
 
-export default function WordRow({ word = '', result = [], className = '' }: WordRowProps) {
+export default function WordRow({ word = '', result = [], className = '', disableAnimations = false }: WordRowProps) {
     
-    const lettersRemaining = WORD_LENGTH - word.length;
-    const letters = word.split('').concat(Array(lettersRemaining).fill(''));
+    const lettersRemaining = WORD_LENGTH - word.length
+    const letters = word.split('').concat(Array(lettersRemaining).fill(''))
+
+    const settingsStore = useSettingsStore()
 
     return(
         <div className={`grid grid-cols-5 gap-[5px] ${className}`}>
             {letters.map((char, index) => (
-                <CharacterBox key={index} value={char} state={result[index]} index={index} />
+                <CharacterBox key={index} value={char} state={result[index]} index={index} disableAnimations={settingsStore.disableAnimations || disableAnimations}/>
             ))}
         </div>
     )
@@ -26,55 +29,56 @@ interface CharacterBoxProps {
     value?: string
     state?: LetterState
     index: number
+    disableAnimations: boolean
 }
 
-function CharacterBox({ value, state, index }: CharacterBoxProps) {
+function CharacterBox({ value, state, index, disableAnimations }: CharacterBoxProps) {
     const [showNewValue, setNewValue] = useState(false)
     const [showFlip, setFlip] = useState(false)
-    const [changeBg, setChangeBg] = useState(false)
-    const settingsStore = useSettingsStore()
+    const [changeColor, setChangeColor] = useState(false)
 
     useEffect(() => {
-        const timer: ReturnType<typeof setTimeout> = setTimeout(() => setNewValue(false), 100);
+        const timer: ReturnType<typeof setTimeout> = setTimeout(() => setNewValue(false), 100)
         return () => clearTimeout(timer)
     }, [showNewValue])
 
     useEffect(() => {
-        const timer: ReturnType<typeof setTimeout> = setTimeout(() => setFlip(false), 250);
+        const timer: ReturnType<typeof setTimeout> = setTimeout(() => setFlip(false), 250)
         return () => clearTimeout(timer)
     }, [showFlip])
 
     useEffect(() => {
-        if(value && value.length && !settingsStore.disableAnimations) {
+        if(value && value.length && !disableAnimations) {
             setNewValue(true)
         }
     }, [value])
 
     useEffect(() => {
         if(state != null && [LetterState.Match, LetterState.Miss, LetterState.Present].includes(state)) {
-            if(!settingsStore.disableAnimations) {
+            if(!disableAnimations) {
             const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
                 setFlip(true)
-                setChangeBg(true)
+                setChangeColor(true)
             }, (index + 1) * 200)
             return () => clearTimeout(timer)
             } else {
-                setChangeBg(true)
+                setChangeColor(true)
             }
         } else {
             setFlip(false)
-            setChangeBg(false)
+            setChangeColor(false)
         }
     }, [state])
   
     return (
         <div
-            className={`aspect-square w-full rounded-md inline-flex justify-center items-center border border-zinc-600 p-2 uppercase 
-                font-extrabold text-4xl before:inline-block before:content-['_']
+            className={`aspect-square w-full rounded-md inline-flex justify-center items-center border border-zinc-400
+                dark:border-zinc-600 p-2 uppercase font-extrabold text-4xl before:inline-block before:content-['_']
+                ${state == undefined ? 'text-black dark:text-[rgba(255,255,255,0.87)]' : ''}
                 ${showNewValue ? 'animate-[pop_100ms]' : ''}
                 ${value && value.length && !state ? '!border-zinc-500' : ''}
                 ${showFlip ? 'animate-flip' : ''}
-                ${changeBg && state != null ? `${characterStateStyles[state]}` : ''}
+                ${changeColor && state != null ? `${characterStateStyles[state]}` : ''}
             `}
         >
             {value}
@@ -83,7 +87,7 @@ function CharacterBox({ value, state, index }: CharacterBoxProps) {
 }
   
 const characterStateStyles = {
-    [LetterState.Miss]: '!border-0 !bg-[#3a3a3c]',
-    [LetterState.Present]: '!border-0 !bg-[#b59f3b]',
-    [LetterState.Match]: '!border-0 !bg-[#538d4e]',
+    [LetterState.Miss]: '!border-0 !bg-[#787c7e] dark:!bg-[#3a3a3c] !text-[rgba(255,255,255,0.87)]',
+    [LetterState.Present]: '!border-0 !bg-[#c9b458] dark:!bg-[#b59f3b] !text-[rgba(255,255,255,0.87)]',
+    [LetterState.Match]: '!border-0 !bg-[#6aaa64] dark:!bg-[#538d4e] !text-[rgba(255,255,255,0.87)]',
 }

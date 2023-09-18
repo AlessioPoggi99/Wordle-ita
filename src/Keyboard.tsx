@@ -1,5 +1,5 @@
 import { useGameStore, useSettingsStore } from './hooks/useStore'
-import { LetterState } from './word-utils'
+import { LetterState } from './utils/wordUtils'
 
 interface KeyboardProps {
     onClick: (key: string) => void
@@ -31,9 +31,9 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
                         if(letterState && !settingsStore.disableAnimations) styles += ' transition-all delay-[1500ms]'
 
                         if (letterState) {
-                            styles += ' text-white px-2 ' + letterState
+                            styles += ' text-[rgba(255,255,255,0.87)] px-2 ' + letterState
                         } else if (key !== '') {
-                            styles += ' bg-[#818384]'
+                            styles += ' bg-[#d3d6da] dark:bg-[#818384]'
                         }
 
                         if (key === '') {
@@ -55,9 +55,9 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
 }
 
 const keyStateStyles = {
-    [LetterState.Miss]: '!bg-[#3a3a3c]',
-    [LetterState.Present]: '!bg-[#b59f3b]',
-    [LetterState.Match]: '!bg-[#538d4e]',
+    [LetterState.Miss]: '!bg-[#787c7e] dark:!bg-[#3a3a3c]',
+    [LetterState.Present]: '!bg-[#c9b458] dark:!bg-[#b59f3b]',
+    [LetterState.Match]: '!bg-[#6aaa64] dark:!bg-[#538d4e]',
 }
 
 const keyboardKeys = [

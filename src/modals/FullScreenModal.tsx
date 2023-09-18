@@ -25,12 +25,12 @@ export default function FullScreenModal({ children, show, title, onClose }: Full
     return (
         showModal && <div 
             role="modal" 
-            className={`absolute h-[calc(100svh-0px)] w-full bg-[#242424] top-0 left-0 pointer-events-none opacity-0
+            className={`absolute h-[calc(100svh-0px)] w-full bg-[#e3e3e1] dark:bg-[#242424] top-0 left-0 pointer-events-none opacity-0
                 ${show ? 'animate-slidein pointer-events-auto opacity-100' : 'animate-slideout'}`
         }>
             <div className='flex flex-col justify-between mx-auto max-w-lg px-4'>
                 <header className="relative flex justify-center items-center py-4">
-                    <h1 className="text-xl font-bold text-center uppercase">{title}</h1>
+                    <h1 className="text-xl font-extrabold text-center uppercase">{title}</h1>
                     <img
                         role="button"
                         src={XmarkIcon}

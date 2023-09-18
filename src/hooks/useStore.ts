@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { persist, createJSONStorage } from "zustand/middleware"
-import { getRandomWord, LetterState } from '../word-utils';
+import { getRandomWord, LetterState } from '../utils/wordUtils';
 
 export const NUMBER_OF_GUESSES = 6;
 export const WORD_LENGTH = 5;
@@ -43,10 +43,10 @@ type ModalStoreState = {
 type SettingsStoreState = {
     hardMode: boolean
     disableAnimations: boolean
-    darkTheme: boolean
+    theme: 'light' | 'dark'
     toggleHardMode: (hardMode: boolean) => void
-    toggleDarkTheme: (disableAnimations: boolean) => void
-    toggleDisableAnimations: (darkTheme: boolean) => void
+    toggleTheme: () => void
+    toggleDisableAnimations: (disableAnimations: boolean) => void
 }
 
 export const useGameStore = create<GameStoreState>()(
@@ -178,10 +178,10 @@ export const useSettingsStore = create<SettingsStoreState>()(
     persist((set) => ({
         hardMode: false,
         disableAnimations: false,
-        darkTheme: true,
+        theme: 'dark',
         toggleHardMode: (hardMode) => set(() => ({ hardMode })),
         toggleDisableAnimations: (disableAnimations) => set(() => ({ disableAnimations })),
-        toggleDarkTheme: (darkTheme) => set(() => ({ darkTheme })),
+        toggleTheme: () => set((state) => ({ theme: state.theme == 'dark' ? 'light' : 'dark' })),
     }),
     {
         name: 'wordle-settings-storage', // unique name

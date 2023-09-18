@@ -25,6 +25,8 @@ $PROJECT_ROOT
 │   ├── hooks
 │   │   # React components used as modals
 │   ├── modals
+│   │   # Utility functions
+│   ├── utils
 │   │   # App.tsx and main components
 │   └── *
 │

@@ -1,5 +1,5 @@
-import answerDict from './dict/dict5-1524.json'
-import validatorDict from './dict/dict5-9068.json'
+import answerDict from '../dict/dict5-1524.json'
+import validatorDict from '../dict/dict5-9068.json'
 
 export enum LetterState {
     Miss, // Letter doesn't exist at all
