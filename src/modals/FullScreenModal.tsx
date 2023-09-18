@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react"
+import XmarkIcon from '../assets/xmark.svg'
 
-export default function FullScreenModal({ children, show }: { children: React.ReactNode | React.ReactNode[], show: boolean }) {
+interface FullScreenModalProps {
+    children: React.ReactNode | React.ReactNode[]
+    show: boolean
+    title: string
+    onClose: () => void
+}
+
+export default function FullScreenModal({ children, show, title, onClose }: FullScreenModalProps) {
 
     const [showModal, setShowModal] = useState(false)
 
@@ -21,6 +29,16 @@ export default function FullScreenModal({ children, show }: { children: React.Re
                 ${show ? 'animate-slidein pointer-events-auto opacity-100' : 'animate-slideout'}`
         }>
             <div className='flex flex-col justify-between mx-auto max-w-lg px-4'>
+                <header className="relative flex justify-center items-center py-4">
+                    <h1 className="text-xl font-bold text-center uppercase">{title}</h1>
+                    <img
+                        role="button"
+                        src={XmarkIcon}
+                        alt='close button'
+                        className='absolute right-0 w-5 h-5 cursor-pointer hover:invert duration-300'
+                        onClick={onClose}
+                    />
+                </header>
                 {children}
             </div>
         </div>

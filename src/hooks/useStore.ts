@@ -41,8 +41,10 @@ type ModalStoreState = {
 }
 
 type SettingsStoreState = {
+    hardMode: boolean
     disableAnimations: boolean
     darkTheme: boolean
+    toggleHardMode: (hardMode: boolean) => void
     toggleDarkTheme: (disableAnimations: boolean) => void
     toggleDisableAnimations: (darkTheme: boolean) => void
 }
@@ -144,7 +146,7 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
                 ),
                 winInRow: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) ? isWin ? state.winInRow + 1 : 0 : state.winInRow,
                 winAttemptsArr: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? [...state.winAttemptsArr, attempts] : state.winAttemptsArr,
-                lastSaved: {answer, attempts},
+                lastSaved: {answer, attempts: isWin ? attempts : NaN},
             })),
             resetStatistics: () => set(() => ({ 
                 matches: 0,
@@ -174,8 +176,10 @@ export const useModalStore = create<ModalStoreState>()(
 
 export const useSettingsStore = create<SettingsStoreState>()(
     persist((set) => ({
+        hardMode: false,
         disableAnimations: false,
         darkTheme: true,
+        toggleHardMode: (hardMode) => set(() => ({ hardMode })),
         toggleDisableAnimations: (disableAnimations) => set(() => ({ disableAnimations })),
         toggleDarkTheme: (darkTheme) => set(() => ({ darkTheme })),
     }),

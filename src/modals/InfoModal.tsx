@@ -2,22 +2,12 @@ import WordRow from "../WordRow"
 import { useModalStore } from "../hooks/useStore"
 import { LetterState } from "../word-utils"
 import FullScreenModal from "./FullScreenModal"
-import XmarkIcon from '../assets/xmark.svg'
 
 export default function InfoModal({ show = false }: {show: boolean}) {
     const modalStore = useModalStore()
 
     return (
-        <FullScreenModal show={show}>
-            <header className="relative flex justify-center items-center py-4">
-                <h1 className="text-xl font-bold text-center uppercase">Come giocare</h1>
-                <img 
-                    src={XmarkIcon}
-                    alt='close button'
-                    className='absolute right-0 w-5 h-5 cursor-pointer hover:invert duration-300'
-                    onClick={() => { modalStore.toggleInfoModal(false) }}
-                />
-            </header>
+        <FullScreenModal show={show} title="Come giocare" onClose={() => modalStore.toggleInfoModal(false)}>
             <section className="text-justify font-light flex flex-col gap-y-2 my-4">
                 <p>Hai <strong className="font-bold">6</strong> tentativi per indovinare una parola di <strong className="font-bold">5</strong> lettere.</p>
                 <p>Dopo ogni tentativo potrai capire quante delle lettere da te inserite sono contenute nella parola da indovinare, secondo i colori assunti delle caselle.</p>
@@ -48,7 +38,7 @@ export default function InfoModal({ show = false }: {show: boolean}) {
                     <p>Nessuna di queste lettere è corretta</p>
                 </div>
             </section>
-            <p className="my-4">Più di <strong className="font-bold">1500</strong> parole 🇮🇹</p>
+            <p className="my-4">Più di <strong className="font-bold">1500</strong> parole 🇮🇹 con cui giocare.</p>
         </FullScreenModal>
     )
 }

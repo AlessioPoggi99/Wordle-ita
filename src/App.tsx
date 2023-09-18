@@ -4,7 +4,7 @@ import useGuess from './hooks/useGuess'
 import usePrevious from './hooks/usePrevious'
 import { computeGuess, isValidWord } from './word-utils'
 import WordRow from './WordRow'
-import GameOverModal from './modals/GameOverModal'
+import { GameOverModal, GameOverOverlay } from './modals/GameOverModal'
 import Keyboard from './Keyboard'
 import Header from './Header'
 import InfoModal from './modals/InfoModal'
@@ -65,7 +65,7 @@ export default function App() {
 
             <Header />
 
-            <section className=''>
+            <section>
                 <div className="grid grid-rows-6 gap-[5px] max-w-sm mx-auto px-4 py-2">
                     {gameStore.rows.map((word, index) => (
                         <WordRow
@@ -78,10 +78,12 @@ export default function App() {
                 </div>
             </section>
 
-            <section className=''>
+            <section>
                 <Keyboard onClick={(key) => { addGuessLetter(key) }}/>
             </section>
 
+
+            <GameOverOverlay show={gameStore.gameState != 'playing'} onClick={() => modalStore.toggleGameOverModal(true)}/>
             <GameOverModal show={modalStore.showGameOverModal} />
             <InfoModal show={modalStore.showInfoModal} />
             <SettingsModal show={modalStore.showSettingsModal} />

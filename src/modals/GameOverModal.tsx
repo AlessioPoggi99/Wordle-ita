@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useGameStore, useStatisticsStore, useModalStore } from '../hooks/useStore'
 import WordRow from '../WordRow'
+import FullScreenModal from './FullScreenModal'
 
-export default function GameOverModal({ show = false }: {show: boolean}) {
+export const GameOverModal = ({ show = false }: {show: boolean}) => {
     const gameStore = useGameStore()
     const statisticsStore = useStatisticsStore()
     const modalStore = useModalStore()
@@ -30,24 +31,20 @@ export default function GameOverModal({ show = false }: {show: boolean}) {
     }, [statisticsStore.winAttemptsArr])
 
     return (
-        <div 
-            role="modal"
-            className={`
-                absolute bg-[#2a2733] border border-zinc-600 rounded text-center sm:w-full w-[calc(100%-2rem)] max-w-md
-                p-6 left-1/2 top-1/2 mx-auto translate-x-[-50%] translate-y-[calc(-50%-100vh)] flex flex-col items-center gap-y-8
-                pointer-events-none transition-all opacity-0 duration-300 ${show ? 'opacity-100 pointer-events-auto !translate-y-[-50%]' : ''}`
-            }
+        <FullScreenModal 
+            show={show}
+            title={gameStore.gameState == 'won' ? 'vittoria' : gameStore.gameState == 'lost' ? 'sconfitta' : 'statistiche'}
+            onClose={() => modalStore.toggleGameOverModal(false)}
         >
-            <section>
-                <h3 className='font-bold text-lg uppercase mb-2'>{gameStore.gameState == 'won' ? 'vittoria' : 'sconfitta'}</h3>
+            <section className="items-center flex flex-col my-6">
                 <WordRow
                     word={statisticsStore.lastSaved.answer}
                     className="items-center justify-items-center max-w-fit"
                 />
             </section>
             
-            <section>
-                <h3 className='font-bold text-lg uppercase mb-2'>STATISTICHE</h3>
+            <section className="flex flex-col gap-y-2 py-6 justify-center text-center border-t border-zinc-600">
+                <h3 className='font-bold text-lg uppercase'>STATISTICHE</h3>
                 <div className='grid grid-cols-4 justify-center items-start'>
                     <div className='flex flex-col justify-center items-center'>
                         <h1 className='font-extrabold text-4xl'>{statisticsStore.matches}</h1>
@@ -61,23 +58,26 @@ export default function GameOverModal({ show = false }: {show: boolean}) {
                     </div>
                     <div className='flex flex-col justify-center items-center'>
                         <h1 className='font-extrabold text-4xl'>{statisticsStore.winInRow}</h1>
-                        <p className='font-light text-sm'>Vittorie di fila</p>
+                        <p className='font-light text-sm'>Streak vittorie</p>
                     </div>
                     <div className='flex flex-col justify-center items-center'>
                         <h1 className='font-extrabold text-4xl'>{statisticsStore.winInRowRecord}</h1>
-                        <p className='font-light text-sm'>Record vittorie di fila</p>
+                        <p className='font-light text-sm'>Max Streak</p>
                     </div>
                 </div>
             </section>
 
-            <section className='w-full'>
-                <h3 className='font-bold text-lg uppercase mb-2'>distribuzione tentativi</h3>
+            <section className='w-full flex flex-col pb-6 gap-y-2 justify-center text-center border-b border-zinc-600'>
+                <h3 className='font-bold text-lg uppercase'>distribuzione tentativi</h3>
                 <div className='flex flex-col gap-y-1'>
                     {percentages.map((value, index) => (
                         <div className='grid grid-cols-[1rem_1fr] gap-x-2' key={index}>
                             <p className='text-sm'>{index + 1}</p>
                             <div 
-                                className='bg-zinc-600 text-sm font-semibold text-right pr-2 rounded-e'
+                                className={`
+                                    ${statisticsStore.lastSaved.attempts == index + 1 ? 'bg-[#538d4e]' : 'bg-zinc-600'} 
+                                    text-sm font-semibold text-right pr-2 rounded-e
+                                `}
                                 style={{width: `${value}%`}}
                             >
                                 {distribution[index]}
@@ -88,7 +88,7 @@ export default function GameOverModal({ show = false }: {show: boolean}) {
             </section>
 
             <button
-                className="hover:scale-[1.03] font-bold text-base uppercase transition-all rounded bg-[#538d4e] p-2 mt-4 shadow w-full"
+                className="hover:scale-[1.03] font-bold text-base uppercase transition-all rounded bg-[#538d4e] p-3 mt-6 shadow w-full"
                 onClick={() => {
                     gameStore.newGame()
                     modalStore.toggleGameOverModal(false)
@@ -96,6 +96,16 @@ export default function GameOverModal({ show = false }: {show: boolean}) {
             >
                 New Game
             </button>
-        </div>
+        </FullScreenModal>
     )
+}
+
+export const GameOverOverlay = ({ show, onClick }: { show: boolean, onClick: () => void }) => {
+    return show && 
+        <div 
+            role='button'
+            className='absolute h-[calc(100svh-0px)] w-full top-0 left-0 opacity-0 cursor-default'
+            onClick={onClick}
+        >
+        </div>
 }
