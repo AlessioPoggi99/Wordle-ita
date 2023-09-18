@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useGameStore, useStatisticsStore, useModalStore, WORD_LENGTH } from './hooks/useStore'
+import { useGameStore, useStatisticsStore, useModalStore, WORD_LENGTH, useSettingsStore } from './hooks/useStore'
 import useGuess from './hooks/useGuess'
 import usePrevious from './hooks/usePrevious'
-import { computeGuess, isValidWord } from './utils/wordUtils'
+import { computeGuess, isValidGuess } from './utils/wordUtils'
 import WordRow from './WordRow'
 import { GameOverModal, GameOverOverlay } from './modals/GameOverModal'
 import Keyboard from './Keyboard'
@@ -15,6 +15,7 @@ export default function App() {
     const gameStore = useGameStore()
     const statisticsStore = useStatisticsStore()
     const modalStore = useModalStore()
+    const settingsStore = useSettingsStore()
 
     /* GUESS HOOK */
     const [guess, setGuess, addGuessLetter] = useGuess()
@@ -22,20 +23,23 @@ export default function App() {
 
     useEffect(() => {
         if(gameStore.gameState != 'playing') {
+            // Don't add guess or letter if game is over
             setGuess('')
             return
         }
-
         if (guess.length === 0 && previousGuess?.length === WORD_LENGTH) {
-            if (isValidWord(previousGuess)) {
-                setInvalidGuess(false)
+            // Adding guess
+            const guessCheck = isValidGuess(settingsStore.hardMode, previousGuess, gameStore.currentRow, gameStore.rows)
+            if(guessCheck.isValid) {
                 const result = computeGuess(previousGuess, gameStore.answer)
                 gameStore.updateRow({ guess: previousGuess, result })
             } else {
+                console.log(guessCheck)
                 setInvalidGuess(true)
                 setGuess(previousGuess)
             }
         } else {
+            // Adding letter
             gameStore.updateRow({guess})
         }
     }, [guess])

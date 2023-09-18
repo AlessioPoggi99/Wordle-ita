@@ -1,5 +1,6 @@
 import answerDict from '../dict/dict5-1524.json'
 import validatorDict from '../dict/dict5-9068.json'
+import { GuessRow } from '../hooks/useStore'
 
 export enum LetterState {
     Miss, // Letter doesn't exist at all
@@ -56,7 +57,7 @@ export function getRandomWord(): string {
     return answerDict[Math.floor(Math.random() * answerDict.length)].toLowerCase()
 }
 
-export function isValidWord(word: string): boolean {
+function isValidWord(word: string): boolean {
     return validatorDict.includes(word.toLowerCase()) || answerDict.includes(word.toLowerCase())
 }
 
@@ -68,4 +69,32 @@ const allIndexOf = (arr: string[], char: string) => {
         }
     })
     return indexes
+}
+
+export function isValidGuess(hardMode: boolean, guess: string, currentRow: number, rows: GuessRow[]): { isValid: boolean, error?: string } {
+    if (isValidWord(guess)) {
+        if(hardMode && currentRow > 0) {
+            const prevRow = rows[currentRow - 1]
+
+            for (let index = 0; index < prevRow.guess.length; index++) {
+                if(prevRow.result && prevRow.result[index] == 2) { 
+                    if(guess[index] != prevRow.guess[index]) {
+                        return { isValid: false , error: `La ${index+1}ta lettera deve essere una ${prevRow.guess[index]}` }
+                    } else {
+                        guess = guess.substring(0, index) + '2' + guess.substring(index + 1)
+                    }
+                }
+            }
+            for (let index = 0; index < prevRow.guess.length; index++) {
+                if(prevRow.result && prevRow.result[index] == 1) { 
+                    if(!guess.includes(prevRow.guess[index])) {
+                        return { isValid: false , error: `Includi la lettera ${prevRow.guess[index]}` }
+                    }
+                }
+            }
+        }
+        return { isValid: true }
+    } else {
+        return { isValid: false }
+    }
 }

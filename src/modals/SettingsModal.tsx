@@ -26,6 +26,7 @@ export default function SettingsModal({ show = false }: {show: boolean}) {
                     </div>
                     <SwitchToggle 
                         checked={settingsStore.hardMode} 
+                        disabled={gameStore.currentRow > 0}
                         handleChange={(checked) => settingsStore.toggleHardMode(checked)}
                     />
                 </div>
@@ -76,7 +77,7 @@ export default function SettingsModal({ show = false }: {show: boolean}) {
     )
 }
 
-const SwitchToggle = ({ checked, handleChange }: { checked: boolean, handleChange: (checked: boolean) => void }) => {
+const SwitchToggle = ({ checked, disabled = false, handleChange }: { checked: boolean, disabled?: boolean, handleChange: (checked: boolean) => void }) => {
 
     const [isChecked, setIsChecked] = useState(checked)
     const settingsStore = useSettingsStore()
@@ -95,6 +96,7 @@ const SwitchToggle = ({ checked, handleChange }: { checked: boolean, handleChang
             handleDiameter={20}
             onColor={settingsStore.theme == 'light' ? '#6aaa64' : '#538d4e'}
             offColor={settingsStore.theme == 'light' ? '#878a8c' : '#565758'}
+            disabled={disabled}
         />
     )
 }
