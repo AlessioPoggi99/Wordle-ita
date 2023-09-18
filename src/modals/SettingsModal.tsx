@@ -54,6 +54,7 @@ export default function SettingsModal({ show = false }: {show: boolean}) {
                             gameStore.newGame()
                             statisticsStore.resetStatistics()
                             modalStore.toggleGameOverModal(false)
+                            modalStore.toggleSettingsModal(false)
                         }}
                     />
                 </div>

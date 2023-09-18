@@ -104,7 +104,7 @@ export const GameOverOverlay = ({ show, onClick }: { show: boolean, onClick: () 
     return show && 
         <div 
             role='button'
-            className='absolute h-[calc(100svh-0px)] w-full top-0 left-0 opacity-0 cursor-default'
+            className='absolute w-full h-[calc(100svh-70px)] top-[70px] left-0 opacity-0 cursor-default'
             onClick={onClick}
         >
         </div>
