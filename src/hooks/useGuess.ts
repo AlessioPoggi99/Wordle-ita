@@ -18,7 +18,7 @@ export default function useGuess(): [string, React.Dispatch<React.SetStateAction
                     }
             }
 
-            return newGuess
+            return newGuess.toLowerCase()
         })
     }
 

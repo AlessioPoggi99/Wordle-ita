@@ -1,5 +1,5 @@
-import answeerDict from './dict/dict5-1524.json'
-import validatorDict from './dict/dict5-8262.json'
+import answerDict from './dict/dict5-1524.json'
+import validatorDict from './dict/dict5-9068.json'
 
 export enum LetterState {
     Miss, // Letter doesn't exist at all
@@ -53,14 +53,11 @@ export function computeGuess(guess: string, answer: string): LetterState[] {
 }
 
 export function getRandomWord(): string {
-    return answeerDict[Math.floor(Math.random() * answeerDict.length)].toLowerCase()
+    return answerDict[Math.floor(Math.random() * answerDict.length)].toLowerCase()
 }
 
 export function isValidWord(word: string): boolean {
-    return validatorDict.includes(word.toUpperCase()) ||
-        validatorDict.includes(word.toLowerCase()) ||
-        answeerDict.includes(word.toUpperCase()) ||
-        answeerDict.includes(word.toLowerCase())
+    return validatorDict.includes(word.toLowerCase()) || answerDict.includes(word.toLowerCase())
 }
 
 const allIndexOf = (arr: string[], char: string) => {
