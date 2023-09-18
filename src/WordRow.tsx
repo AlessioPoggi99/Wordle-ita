@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { WORD_LENGTH } from './hooks/useStore'
+import { WORD_LENGTH, useSettingsStore } from './hooks/useStore'
 import { LetterState } from './word-utils'
 
 interface WordRowProps {
@@ -32,6 +32,7 @@ function CharacterBox({ value, state, index }: CharacterBoxProps) {
     const [showNewValue, setNewValue] = useState(false)
     const [showFlip, setFlip] = useState(false)
     const [changeBg, setChangeBg] = useState(false)
+    const settingsStore = useSettingsStore()
 
     useEffect(() => {
         const timer: ReturnType<typeof setTimeout> = setTimeout(() => setNewValue(false), 100);
@@ -44,18 +45,22 @@ function CharacterBox({ value, state, index }: CharacterBoxProps) {
     }, [showFlip])
 
     useEffect(() => {
-        if(value && value.length) {
+        if(value && value.length && !settingsStore.disableAnimations) {
             setNewValue(true)
         }
     }, [value])
 
     useEffect(() => {
         if(state != null && [LetterState.Match, LetterState.Miss, LetterState.Present].includes(state)) {
+            if(!settingsStore.disableAnimations) {
             const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
                 setFlip(true)
                 setChangeBg(true)
             }, (index + 1) * 200)
             return () => clearTimeout(timer)
+            } else {
+                setChangeBg(true)
+            }
         } else {
             setFlip(false)
             setChangeBg(false)

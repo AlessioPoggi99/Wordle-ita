@@ -51,7 +51,8 @@ export default function App() {
     useEffect(() => {
         if(gameStore.gameState != 'playing') {
             const isWin = gameStore.gameState == 'won' ? true : false
-            statisticsStore.addMatch(gameStore.answer, isWin, gameStore.currentRow)
+            const attempts = isWin ? gameStore.currentRow : -1
+            statisticsStore.addMatch(gameStore.answer, isWin, attempts)
             const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
                 modalStore.toggleGameOverModal(true)
             }, 2000)

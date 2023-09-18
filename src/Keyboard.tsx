@@ -1,4 +1,4 @@
-import { useGameStore } from './hooks/useStore'
+import { useGameStore, useSettingsStore } from './hooks/useStore'
 import { LetterState } from './word-utils'
 
 interface KeyboardProps {
@@ -7,6 +7,7 @@ interface KeyboardProps {
 
 export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
     const keyboardLetterState = useGameStore((s) => s.keyboardLetterState)
+    const settingsStore = useSettingsStore()
 
     const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         const { textContent, innerHTML } = e.currentTarget
@@ -27,7 +28,7 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
                         let styles = 'keyboardButton rounded font-bold uppercase flex-1 py-3 text-center'
 
                         const letterState = keyStateStyles[keyboardLetterState[key]]
-                        if(letterState) styles += ' transition-all delay-[1500ms]'
+                        if(letterState && !settingsStore.disableAnimations) styles += ' transition-all delay-[1500ms]'
 
                         if (letterState) {
                             styles += ' text-white px-2 ' + letterState

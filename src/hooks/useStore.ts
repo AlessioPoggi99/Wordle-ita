@@ -146,7 +146,7 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
                 ),
                 winInRow: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) ? isWin ? state.winInRow + 1 : 0 : state.winInRow,
                 winAttemptsArr: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? [...state.winAttemptsArr, attempts] : state.winAttemptsArr,
-                lastSaved: {answer, attempts: isWin ? attempts : NaN},
+                lastSaved: {answer, attempts},
             })),
             resetStatistics: () => set(() => ({ 
                 matches: 0,
