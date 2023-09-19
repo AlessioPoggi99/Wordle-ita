@@ -57,15 +57,24 @@ export default function App() {
     }, [showInvalidGuess])
 
     /* GAME OVER & STATISTICS UPDATE */
+    const winNotification = ['Genio!', 'Magnifico!', 'Impressionante!', 'Splendido!', 'Grande!', 'Buono!']
+
+
     useEffect(() => {
         if(gameStore.gameState != 'playing') {
             const isWin = gameStore.gameState == 'won' ? true : false
             const attempts = isWin ? gameStore.currentRow : -1
             statisticsStore.addMatch(gameStore.answer, isWin, attempts)
-            const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
+
+            const timer1: ReturnType<typeof setTimeout> = setTimeout(() => {
+                setNotification(isWin ? winNotification[gameStore.currentRow - 1] : gameStore.answer.toUpperCase())
+            }, 1000)
+
+            const timer2: ReturnType<typeof setTimeout> = setTimeout(() => {
                 modalStore.toggleGameOverModal(true)
-            }, 1500)
-            return () => clearTimeout(timer)
+            }, 3000)
+
+            return () => {clearTimeout(timer1); clearTimeout(timer2)}
         }
     }, [gameStore.gameState])
 
@@ -83,6 +92,7 @@ export default function App() {
                             word={word.guess}
                             result={word.result}
                             className={showInvalidGuess && index === gameStore.currentRow ? 'animate-vibration' : ''}
+                            isWinningRow={gameStore.gameState == 'won' && index == gameStore.currentRow - 1}
                         />
                     ))}
                 </div>

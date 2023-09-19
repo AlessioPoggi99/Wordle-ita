@@ -7,9 +7,10 @@ interface WordRowProps {
   result?: LetterState[]
   className?: string
   disableAnimations?: boolean
+  isWinningRow?: boolean
 }
 
-export default function WordRow({ word = '', result = [], className = '', disableAnimations = false }: WordRowProps) {
+export default function WordRow({ word = '', result = [], className = '', disableAnimations = false, isWinningRow = false }: WordRowProps) {
     
     const lettersRemaining = WORD_LENGTH - word.length
     const letters = word.split('').concat(Array(lettersRemaining).fill(''))
@@ -19,7 +20,14 @@ export default function WordRow({ word = '', result = [], className = '', disabl
     return(
         <div className={`grid grid-cols-5 gap-[5px] ${className}`}>
             {letters.map((char, index) => (
-                <CharacterBox key={index} value={char} state={result[index]} index={index} disableAnimations={settingsStore.disableAnimations || disableAnimations}/>
+                <CharacterBox 
+                    key={index} 
+                    value={char} 
+                    state={result[index]} 
+                    index={index} 
+                    disableAnimations={settingsStore.disableAnimations || disableAnimations}
+                    isWinAnimation={isWinningRow}
+                />
             ))}
         </div>
     )
@@ -30,12 +38,14 @@ interface CharacterBoxProps {
     state?: LetterState
     index: number
     disableAnimations: boolean
+    isWinAnimation?: boolean
 }
 
-function CharacterBox({ value, state, index, disableAnimations }: CharacterBoxProps) {
+function CharacterBox({ value, state, index, disableAnimations, isWinAnimation = false }: CharacterBoxProps) {
     const [showNewValue, setNewValue] = useState(false)
     const [showFlip, setFlip] = useState(false)
     const [changeColor, setChangeColor] = useState(false)
+    const [winAnimation, setWinAnimation] = useState(false)
 
     useEffect(() => {
         const timer: ReturnType<typeof setTimeout> = setTimeout(() => setNewValue(false), 100)
@@ -72,6 +82,15 @@ function CharacterBox({ value, state, index, disableAnimations }: CharacterBoxPr
             setChangeColor(false)
         }
     }, [state])
+
+    useEffect(() => {
+        if(isWinAnimation && !disableAnimations) {
+            const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
+                setWinAnimation(true)
+            }, (index + 1) * 100 + 1000)
+            return () => clearTimeout(timer)
+        } else setWinAnimation(false)
+    }, [isWinAnimation])
   
     return (
         <div
@@ -82,6 +101,7 @@ function CharacterBox({ value, state, index, disableAnimations }: CharacterBoxPr
                 ${value && value.length && !state ? '!border-zinc-500' : ''}
                 ${showFlip ? 'animate-[flipin_250ms_ease-in,_flipout_250ms_ease-in]' : ''}
                 ${changeColor && state != null ? `${characterStateStyles[state]}` : ''}
+                ${winAnimation ? 'animate-jump' : ''}
             `}
         >
             {value}

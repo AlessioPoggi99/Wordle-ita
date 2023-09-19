@@ -12,7 +12,7 @@ export default {
     extend: {
       animation: {
         vibration: 'vibration 600ms infinite',
-        jump: 'jump 1000ms infinite',
+        jump: 'jump 1000ms',
         pop: 'pop 100ms',
         flipin: 'flipin 250ms ease-in',
         flipout: 'flipout 250ms ease-in',

@@ -40,6 +40,7 @@ export const GameOverModal = ({ show = false }: {show: boolean}) => {
                 <WordRow
                     word={statisticsStore.lastSaved.answer}
                     className="items-center justify-items-center max-w-fit"
+                    disableAnimations={true}
                 />
             </section>
             
