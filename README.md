@@ -15,7 +15,7 @@ You have six attempts to guess a five-letter word, with feedback given for each 
 
 ```sh
 $PROJECT_ROOT
-│   # Front-end files
+│   # Source folder
 ├── src
 │   │   # Images and other assets
 │   ├── assets
