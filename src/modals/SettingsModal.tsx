@@ -5,7 +5,12 @@ import Switch from "react-switch"
 import TrashIcon from '../assets/trash.svg'
 import { applyThemePreference } from "../utils/themeUtils"
 
-export default function SettingsModal({ show = false }: { show: boolean }) {
+interface SettingsModalProps {
+    show: boolean
+    setNotification: (notification: string) => void
+}
+
+export default function SettingsModal({ show = false, setNotification }: SettingsModalProps) {
     const gameStore = useGameStore()
     const modalStore = useModalStore()
     const statisticsStore = useStatisticsStore()
@@ -24,11 +29,13 @@ export default function SettingsModal({ show = false }: { show: boolean }) {
                         <p>Modalità difficile</p>
                         <p className="text-xs font-light text-black/50 dark:text-white/50">Ogni lettera nota deve essere usata nei tentativi successivi</p>
                     </div>
-                    <SwitchToggle 
-                        checked={settingsStore.hardMode} 
-                        disabled={gameStore.currentRow > 0}
-                        handleChange={(checked) => settingsStore.toggleHardMode(checked)}
-                    />
+                    <div onClick={() => { if(gameStore.currentRow > 0) setNotification('Puoi cambiare solo a inizio partita') }}>
+                        <SwitchToggle 
+                            checked={settingsStore.hardMode} 
+                            disabled={gameStore.currentRow > 0}
+                            handleChange={(checked) => settingsStore.toggleHardMode(checked)}
+                        />
+                    </div>
                 </div>
                 <div className="flex justify-between items-center pb-4 border-b border-zinc-400 dark:border-zinc-600">
                     <p>Tema scuro</p>
@@ -52,6 +59,7 @@ export default function SettingsModal({ show = false }: { show: boolean }) {
                         alt="delete statistics button"
                         className='w-5 h-5 cursor-pointer duration-300' 
                         onClick={() => {
+                            setNotification('Statistiche eliminate')
                             gameStore.newGame()
                             statisticsStore.resetStatistics()
                             modalStore.toggleGameOverModal(false)

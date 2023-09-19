@@ -9,6 +9,8 @@ import Keyboard from './Keyboard'
 import Header from './Header'
 import InfoModal from './modals/InfoModal'
 import SettingsModal from './modals/SettingsModal'
+import NotificationModal from './modals/NotificationModal'
+import { useNotification } from './hooks/useNotification'
 
 export default function App() {
     /* STORE HOOKS */
@@ -16,6 +18,9 @@ export default function App() {
     const statisticsStore = useStatisticsStore()
     const modalStore = useModalStore()
     const settingsStore = useSettingsStore()
+
+    /* NOTIFICATION HOOK */
+    const [notification, setNotification] = useNotification()
 
     /* GUESS HOOK */
     const [guess, setGuess, addGuessLetter] = useGuess()
@@ -34,7 +39,7 @@ export default function App() {
                 const result = computeGuess(previousGuess, gameStore.answer)
                 gameStore.updateRow({ guess: previousGuess, result })
             } else {
-                console.log(guessCheck)
+                setNotification(guessCheck.error)
                 setInvalidGuess(true)
                 setGuess(previousGuess)
             }
@@ -91,7 +96,8 @@ export default function App() {
             <GameOverOverlay show={gameStore.gameState != 'playing'} onClick={() => modalStore.toggleGameOverModal(true)}/>
             <GameOverModal show={modalStore.showGameOverModal} />
             <InfoModal show={modalStore.showInfoModal} />
-            <SettingsModal show={modalStore.showSettingsModal} />
+            <SettingsModal show={modalStore.showSettingsModal} setNotification={setNotification} />
+            <NotificationModal notification={notification} />
 
         </div>
     )

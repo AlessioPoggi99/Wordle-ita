@@ -79,7 +79,7 @@ export function isValidGuess(hardMode: boolean, guess: string, currentRow: numbe
             for (let index = 0; index < prevRow.guess.length; index++) {
                 if(prevRow.result && prevRow.result[index] == 2) { 
                     if(guess[index] != prevRow.guess[index]) {
-                        return { isValid: false , error: `La ${index+1}ta lettera deve essere una ${prevRow.guess[index]}` }
+                        return { isValid: false , error: `La ${index+1}ª lettera è una ${prevRow.guess[index].toUpperCase()}` }
                     } else {
                         guess = guess.substring(0, index) + '2' + guess.substring(index + 1)
                     }
@@ -88,13 +88,13 @@ export function isValidGuess(hardMode: boolean, guess: string, currentRow: numbe
             for (let index = 0; index < prevRow.guess.length; index++) {
                 if(prevRow.result && prevRow.result[index] == 1) { 
                     if(!guess.includes(prevRow.guess[index])) {
-                        return { isValid: false , error: `Includi la lettera ${prevRow.guess[index]}` }
+                        return { isValid: false , error: `Includi la lettera ${prevRow.guess[index].toUpperCase()}` }
                     }
                 }
             }
         }
         return { isValid: true }
     } else {
-        return { isValid: false }
+        return { isValid: false, error: 'Non nella lista di parole' }
     }
 }

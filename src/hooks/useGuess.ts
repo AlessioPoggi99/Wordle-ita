@@ -6,7 +6,7 @@ export default function useGuess(): [string, React.Dispatch<React.SetStateAction
 
     const addGuessLetter = (letter: string) => {
         setGuess((curGuess) => {
-            const newGuess = letter.length === 1 && curGuess.length !== WORD_LENGTH ? curGuess + letter : curGuess
+            const newGuess = letter.length === 1 && curGuess.length !== WORD_LENGTH && letter.match(/[A-Za-z]/) ? curGuess + letter : curGuess
 
             switch (letter) {
                 case 'Backspace':
