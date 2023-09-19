@@ -5,10 +5,11 @@ interface FullScreenModalProps {
     children: React.ReactNode | React.ReactNode[]
     show: boolean
     title: string
+    className?: string
     onClose: () => void
 }
 
-export default function FullScreenModal({ children, show, title, onClose }: FullScreenModalProps) {
+export default function FullScreenModal({ children, show, title, onClose, className = '' }: FullScreenModalProps) {
 
     const [showModal, setShowModal] = useState(false)
 
@@ -26,7 +27,8 @@ export default function FullScreenModal({ children, show, title, onClose }: Full
         showModal && <div 
             role="modal" 
             className={`absolute h-[calc(100svh-0px)] w-full bg-[#e3e3e1] dark:bg-[#242424] top-0 left-0 pointer-events-none opacity-0
-                ${show ? 'animate-slidein pointer-events-auto opacity-100' : 'animate-slideout'}`
+                ${show ? 'animate-slidein pointer-events-auto opacity-100' : 'animate-slideout'}
+                ${className}`
         }>
             <div className='flex flex-col justify-between mx-auto max-w-lg px-4'>
                 <header className="relative flex justify-center items-center py-4">

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import { useModalStore, useStatisticsStore, useSettingsStore, useGameStore } from "../hooks/useStore"
+import { useModalStore, useSettingsStore, useGameStore } from "../hooks/useStore"
 import FullScreenModal from "./FullScreenModal"
 import Switch from "react-switch"
-import TrashIcon from '../assets/trash.svg'
 import { applyThemePreference } from "../utils/themeUtils"
 
 interface SettingsModalProps {
@@ -13,7 +12,6 @@ interface SettingsModalProps {
 export default function SettingsModal({ show = false, setNotification }: SettingsModalProps) {
     const gameStore = useGameStore()
     const modalStore = useModalStore()
-    const statisticsStore = useStatisticsStore()
     const settingsStore = useSettingsStore()
 
     useEffect(() => {
@@ -49,22 +47,6 @@ export default function SettingsModal({ show = false, setNotification }: Setting
                     <SwitchToggle 
                         checked={settingsStore.disableAnimations} 
                         handleChange={(checked) => settingsStore.toggleDisableAnimations(checked)}
-                    />
-                </div>
-                <div className="flex justify-between items-center pb-4 border-b border-zinc-400 dark:border-zinc-600">
-                    <p>Elimina statistiche</p>
-                    <img 
-                        role="button"
-                        src={TrashIcon}
-                        alt="delete statistics button"
-                        className='w-5 h-5 cursor-pointer duration-300' 
-                        onClick={() => {
-                            setNotification('Statistiche eliminate')
-                            gameStore.newGame()
-                            statisticsStore.resetStatistics()
-                            modalStore.toggleGameOverModal(false)
-                            modalStore.toggleSettingsModal(false)
-                        }}
                     />
                 </div>
                 <div className="flex justify-between items-center pb-4 border-b border-zinc-400 dark:border-zinc-600">
