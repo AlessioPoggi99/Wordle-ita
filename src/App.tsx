@@ -59,7 +59,7 @@ export default function App() {
             statisticsStore.addMatch(gameStore.answer, isWin, attempts)
             const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
                 modalStore.toggleGameOverModal(true)
-            }, 2000)
+            }, 1500)
             return () => clearTimeout(timer)
         }
     }, [gameStore.gameState])

@@ -43,7 +43,7 @@ function CharacterBox({ value, state, index, disableAnimations }: CharacterBoxPr
     }, [showNewValue])
 
     useEffect(() => {
-        const timer: ReturnType<typeof setTimeout> = setTimeout(() => setFlip(false), 250)
+        const timer: ReturnType<typeof setTimeout> = setTimeout(() => setFlip(false), 500)
         return () => clearTimeout(timer)
     }, [showFlip])
 
@@ -56,11 +56,14 @@ function CharacterBox({ value, state, index, disableAnimations }: CharacterBoxPr
     useEffect(() => {
         if(state != null && [LetterState.Match, LetterState.Miss, LetterState.Present].includes(state)) {
             if(!disableAnimations) {
-            const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
-                setFlip(true)
-                setChangeColor(true)
-            }, (index + 1) * 200)
-            return () => clearTimeout(timer)
+                const timer: ReturnType<typeof setTimeout> = setTimeout(() => {
+                    setFlip(true)
+                    const timer2: ReturnType<typeof setTimeout> = setTimeout(() => {
+                        setChangeColor(true)
+                    }, 250)
+                    return () => clearTimeout(timer2)
+                }, (index + 1) * 100)
+                return () => clearTimeout(timer)
             } else {
                 setChangeColor(true)
             }
@@ -72,12 +75,12 @@ function CharacterBox({ value, state, index, disableAnimations }: CharacterBoxPr
   
     return (
         <div
-            className={`aspect-square w-full rounded-md inline-flex justify-center items-center border border-zinc-400
-                dark:border-zinc-600 p-2 uppercase font-extrabold text-4xl before:inline-block before:content-['_']
+            className={`aspect-square w-full rounded-md inline-flex justify-center items-center border border-zinc-400 dark:border-zinc-600
+                p-2 uppercase font-extrabold text-4xl before:inline-block before:content-['_'] animate-delay-[0s,_250ms]
                 ${state == undefined ? 'text-black dark:text-[rgba(255,255,255,0.87)]' : ''}
                 ${showNewValue ? 'animate-[pop_100ms]' : ''}
                 ${value && value.length && !state ? '!border-zinc-500' : ''}
-                ${showFlip ? 'animate-flip' : ''}
+                ${showFlip ? 'animate-[flipin_250ms_ease-in,_flipout_250ms_ease-in]' : ''}
                 ${changeColor && state != null ? `${characterStateStyles[state]}` : ''}
             `}
         >

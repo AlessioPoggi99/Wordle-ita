@@ -5,7 +5,7 @@ import Switch from "react-switch"
 import TrashIcon from '../assets/trash.svg'
 import { applyThemePreference } from "../utils/themeUtils"
 
-export default function SettingsModal({ show = false }: {show: boolean}) {
+export default function SettingsModal({ show = false }: { show: boolean }) {
     const gameStore = useGameStore()
     const modalStore = useModalStore()
     const statisticsStore = useStatisticsStore()

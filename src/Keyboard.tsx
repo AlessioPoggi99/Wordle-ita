@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useGameStore, useSettingsStore } from './hooks/useStore'
 import { LetterState } from './utils/wordUtils'
 
@@ -20,6 +21,11 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
         onClickProps(returnProps)
     }
 
+    const [changeColor, setChangeColor] = useState(false)
+    useEffect(() => {
+        setChangeColor(true)
+    }, [keyboardLetterState])
+
     return (
         <div className={`flex flex-col pb-4`}>
             {keyboardKeys.map((keyboardRow, rowIndex) => (
@@ -27,8 +33,8 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
                     {keyboardRow.map((key, index) => {
                         let styles = 'keyboardButton rounded font-bold uppercase flex-1 py-3 text-center'
 
-                        const letterState = keyStateStyles[keyboardLetterState[key]]
-                        if(letterState && !settingsStore.disableAnimations) styles += ' transition-all delay-[1500ms]'
+                        const letterState = changeColor ? keyStateStyles[keyboardLetterState[key]] : ''
+                        if(letterState && !settingsStore.disableAnimations) styles += ' transition-all delay-[1000ms]'
 
                         if (letterState) {
                             styles += ' text-[rgba(255,255,255,0.87)] px-2 ' + letterState
