@@ -20,6 +20,10 @@ html.light {
   background-color: #e3e3e1;
 }
 
+textarea {
+  resize: none;
+}
+
 .keyboardButton {
   text-align: -webkit-center !important;
 }

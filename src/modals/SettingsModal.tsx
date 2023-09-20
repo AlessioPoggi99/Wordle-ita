@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
-import { useModalStore, useSettingsStore, useGameStore } from "../hooks/useStore"
+import { useModalStore, useSettingsStore, useGameStore, useStatisticsStore } from "../hooks/useStore"
 import FullScreenModal from "./FullScreenModal"
 import Switch from "react-switch"
 import { applyThemePreference } from "../utils/themeUtils"
+import TrashIcon from '../assets/trash.svg'
+import ImportIcon from '../assets/import.svg'
+import { MigratePanel } from "./MigratePanel"
 
 interface SettingsModalProps {
     show: boolean
@@ -13,6 +16,9 @@ export default function SettingsModal({ show = false, setNotification }: Setting
     const gameStore = useGameStore()
     const modalStore = useModalStore()
     const settingsStore = useSettingsStore()
+    const statisticsStore = useStatisticsStore()
+
+    const [isMigratePanelOpen, setMigratePanelOpen] = useState(false)
 
     useEffect(() => {
         applyThemePreference(settingsStore.theme)
@@ -50,6 +56,36 @@ export default function SettingsModal({ show = false, setNotification }: Setting
                     />
                 </div>
                 <div className="flex justify-between items-center pb-4 border-b border-zinc-400 dark:border-zinc-600">
+                    <p>Esporta/Importa statistiche</p>
+                    <img 
+                        role="button"
+                        src={ImportIcon}
+                        alt="open import/export panel"
+                        className='w-5 h-5 cursor-pointer hover:invert duration-300'
+                        onClick={() => setMigratePanelOpen(true)}
+                    />
+                </div>
+                <div className="flex justify-between items-center pb-4 border-b border-zinc-400 dark:border-zinc-600">
+                    <p>Elimina statistiche</p>
+                    <img 
+                        role="button"
+                        src={TrashIcon}
+                        alt="reset statistics"
+                        className='w-5 h-5 cursor-pointer hover:invert-[20%] duration-300'
+                        onClick={() => {
+                            if(gameStore.gameState == 'playing' && gameStore.currentRow > 0) {
+                                setNotification('Riprova a fine partita')
+                            } else {
+                                statisticsStore.resetStatistics()
+                                setNotification('Statistiche eliminate')
+                                gameStore.newGame()
+                                modalStore.toggleGameOverModal(false)
+                                modalStore.toggleSettingsModal(false)
+                            }
+                        }}
+                    />
+                </div>
+                <div className="flex justify-between items-center pb-4 border-b border-zinc-400 dark:border-zinc-600">
                     <p>Feedback</p>
                     <a href="https://github.com/AlessioPoggi99" target="_blank" className="text-base font-normal text-black/50 dark:text-white/50 underline">Github</a>
                 </div>
@@ -62,6 +98,8 @@ export default function SettingsModal({ show = false, setNotification }: Setting
             <footer className="text-center absolute bottom-4 left-0 right-0">
                 <h3 className="text-black/50 dark:text-white/50 text-sm">© 2023: Alessio Poggi, v1.0.0</h3>
             </footer>
+
+            <MigratePanel show={isMigratePanelOpen} setMigrateModalOpen={() => setMigratePanelOpen(false)} setNotification={setNotification}/>
             
         </FullScreenModal>
     )

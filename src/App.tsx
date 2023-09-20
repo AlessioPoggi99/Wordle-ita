@@ -11,7 +11,6 @@ import InfoModal from './modals/InfoModal'
 import SettingsModal from './modals/SettingsModal'
 import NotificationModal from './modals/NotificationModal'
 import { useNotification } from './hooks/useNotification'
-import { StatisticsModal } from './modals/StatisticsModal'
 
 export default function App() {
     /* STORE HOOKS */
@@ -108,7 +107,6 @@ export default function App() {
             <GameOverModal show={modalStore.showGameOverModal} />
             <InfoModal show={modalStore.showInfoModal} />
             <SettingsModal show={modalStore.showSettingsModal} setNotification={setNotification} />
-            <StatisticsModal show={modalStore.showStatisticsModal} setNotification={setNotification}/>
             <NotificationModal notification={notification} />
 
         </div>

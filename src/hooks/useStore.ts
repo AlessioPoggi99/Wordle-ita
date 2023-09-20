@@ -29,17 +29,16 @@ interface StatisticsStoreState {
     lastSaved: {answer: string, attempts: number}
     addMatch(answer: string, isWin: boolean, attempts: number): void
     resetStatistics(): void
+    importStatistics(statistics: string): boolean
 }
 
 type ModalStoreState = {
     showGameOverModal: boolean
     showSettingsModal: boolean
     showInfoModal: boolean
-    showStatisticsModal: boolean
     toggleGameOverModal: (showGameOverModal: boolean) => void
     toggleSettingsModal: (showSettingsModal: boolean) => void
     toggleInfoModal: (showInfoModal: boolean) => void
-    toggleStatisticsModal: (showStatisticsModal: boolean) => void
 }
 
 type SettingsStoreState = {
@@ -157,6 +156,24 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
                 winInRowRecord: 0,
                 winAttemptsArr: [],
             })),
+            importStatistics: (statistics) => {
+                try {
+                    const stats = JSON.parse(statistics)
+
+                    set({
+                        matches: stats.matches,
+                        wins: stats.wins,
+                        winInRow: stats.winInRow,
+                        winInRowRecord: stats.winInRowRecord,
+                        winAttemptsArr: stats.winAttemptsArr,
+                        lastSaved: stats.lastSaved,
+                    })
+
+                    return true
+                } catch (error) {
+                    return false
+                }
+            },
 		}),
 		{
 			name: 'wordle-statistics-storage', // unique name
@@ -174,7 +191,6 @@ export const useModalStore = create<ModalStoreState>()(
         toggleGameOverModal: (showGameOverModal) => set(() => ({ showGameOverModal })),
         toggleSettingsModal: (showSettingsModal) => set(() => ({ showSettingsModal })),
         toggleInfoModal: (showInfoModal) => set(() => ({ showInfoModal })),
-        toggleStatisticsModal: (showStatisticsModal) => set(() => ({ showStatisticsModal })),
     }),
 )
 
