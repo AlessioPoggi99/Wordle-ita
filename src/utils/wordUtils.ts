@@ -1,4 +1,4 @@
-import answerDict from '../dict/dict5-1524.json'
+import answerDict from '../dict/dict5-2991.json'
 import validatorDict from '../dict/dict5-9068.json'
 import { GuessRow } from '../hooks/useStore'
 

@@ -41,7 +41,7 @@ export default function InfoModal({ show = false }: {show: boolean}) {
                     <p>Nessuna di queste lettere è corretta</p>
                 </div>
             </section>
-            <p className="my-4">Più di <strong className="font-bold">1500</strong> parole 🇮🇹 con cui giocare.</p>
+            <p className="my-4">Più di <strong className="font-bold">3000</strong> parole 🇮🇹 con cui giocare.</p>
         </FullScreenModal>
     )
 }
