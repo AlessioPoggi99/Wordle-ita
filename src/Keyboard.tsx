@@ -27,11 +27,12 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
     }, [keyboardLetterState])
 
     return (
-        <div className={`flex flex-col pb-4`}>
+        <div className={`flex flex-col pb-8 short:pb-2 gap-y-1 -mx-3 sm:mx-0`}>
             {keyboardKeys.map((keyboardRow, rowIndex) => (
-                <div key={rowIndex} className="my-1 flex justify-center space-x-1">
+                <div key={rowIndex} className="flex justify-center space-x-1">
                     {keyboardRow.map((key, index) => {
-                        let styles = 'keyboardButton rounded font-bold uppercase flex-1 py-3 text-center'
+                        let styles = 'keyboardButton rounded font-bold uppercase flex-1 text-center xxshort:h-8 xshort:h-10 short:h-12 h-14 text-sm xxshort:text-xs cursor-pointer select-none'
+
 
                         const letterState = changeColor ? keyStateStyles[keyboardLetterState[key]] : ''
                         if(letterState && !settingsStore.disableAnimations) styles += ' transition-all delay-[1000ms]'

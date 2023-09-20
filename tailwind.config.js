@@ -10,6 +10,11 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      screens: {
+        short: { raw: '(max-height: 650px)' },
+        xshort: { raw: '(max-height: 560px)' },
+        xxshort: { raw: '(max-height: 490px)' },
+      },
       animation: {
         vibration: 'vibration 600ms infinite',
         jump: 'jump 1000ms',
