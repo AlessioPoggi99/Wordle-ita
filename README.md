@@ -47,11 +47,18 @@ yarn dev
 ```
 
 
+## Lighthouse score
+
+<p align="center">
+  <img width="75%" alt="lighthouse-score" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/a894829f-7147-4a95-90ab-17634d9676b3">
+</p>
+
+
 ## Screenshots
 
 #### Mobile (light theme)
 
-<p float="left">
+<p align="center">
   <img width="24%" alt="mobile-home" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/9b517ca1-a831-4cc9-9b94-27c3a1d01b92">
   <img width="24%" alt="mobile-gameover" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/e525f4c0-bef0-4cfe-a50d-a524d55933c6">
   <img width="24%" alt="mobile-info" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/d93f09ff-08c1-40a8-95af-a3f8a51fbb39">
@@ -60,12 +67,12 @@ yarn dev
 
 #### Desktop (dark theme)
 
-<p float="left">
-  <img width="49.5%" alt="desktop-home" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/94866e20-ac49-40a4-9b49-2b5a5703c8ae">
-  <img width="49.5%" alt="desktop-gameover" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/640a9fc6-4afc-4c53-b4fd-5773f69771ef">
+<p align="center">
+  <img width="49%" alt="desktop-home" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/94866e20-ac49-40a4-9b49-2b5a5703c8ae">
+  <img width="49%" alt="desktop-gameover" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/640a9fc6-4afc-4c53-b4fd-5773f69771ef">
 </p>
 
-<p float="left">
-  <img width="49.5%" alt="desktop-info" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/8d8a1e3f-cb10-4d28-a74e-2349a0bed39f">
-  <img width="49.5%" alt="desktop-settings" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/eeaa13be-cb03-40c0-96f7-b1df031216b8">
+<p align="center">
+  <img width="49%" alt="desktop-info" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/8d8a1e3f-cb10-4d28-a74e-2349a0bed39f">
+  <img width="49%" alt="desktop-settings" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/eeaa13be-cb03-40c0-96f7-b1df031216b8">
 </p>
