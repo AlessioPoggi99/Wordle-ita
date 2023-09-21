@@ -4,9 +4,12 @@
   <img width="100%" alt="lighthouse-score" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/3e628f59-a141-4f83-88d8-45cd2c0a8f06"/>
   &nbsp;
   <div align="center">
-    <img src="https://img.shields.io/badge/Lighthouse-10.3.0-blue" />
-    <img src="https://img.shields.io/github/repo-size/AlessioPoggi99/Wordle-ita" alt="repo-size" />
-    <img src="https://raw.githubusercontent.com/sitdisch/cloud/master/badges/particle/License-MIT.svg" />
+    <a title="Check it out" target="_blank" href="https://github.com/GoogleChrome/lighthouse">
+          <img src="https://img.shields.io/badge/Lighthouse-10.3.0-blue?logo=lighthouse" />
+    </a><br>
+    <img src="https://img.shields.io/badge/Latest%20release-v1.0.0-blue" />
+    <img src="https://img.shields.io/github/Repo-size/AlessioPoggi99/Wordle-ita" alt="repo-size" />
+    <img src="https://img.shields.io/badge/License-MIT-blue" />
   </div>
   <h1></h1>
 </div>
