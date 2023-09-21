@@ -1,8 +1,37 @@
 {
     "short_name": "Wordle 🇮🇹",
     "name": "Wordle 🇮🇹",
-    "start_url": ".",
+    "description": "Indovina la parola nascosta in 6 tentativi. Gioca con piu' di 3000 parole italiane.",
+    "start_url": "./Wordle-ita/",
+    "scope": "./Wordle-ita/",
+    "theme_color":"#242424",
+    "background_color": "#242424",
     "display": "standalone",
-    "orientation": "portrait"
-  }
-  
+    "orientation": "portrait",
+    "icons": [{
+        "src": "/icons/wordle_logo_192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+    },
+    {
+        "src": "/icons/wordle_logo_32x32.png",
+        "sizes": "32x32",
+        "type": "image/png"
+    },
+    {
+        "src": "/icons/wordle-favicon.ico",
+        "sizes": "32x32",
+        "type": "image/x-icon"
+    },
+    {
+        "src": "/icons/wordle-apple-touch-icon.png",
+        "sizes": "180x180",
+        "type": "image/png"
+    },
+    {
+        "src": "/icons/maskable-icon.svg",
+        "sizes": "512x512",
+        "type": "image/svg+xml",
+        "purpose": "any"
+    }]
+}
