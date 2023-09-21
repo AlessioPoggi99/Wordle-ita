@@ -5,11 +5,13 @@
   &nbsp;
   <div align="center">
     <a title="Check it out" target="_blank" href="https://github.com/GoogleChrome/lighthouse">
-          <img src="https://img.shields.io/badge/Lighthouse-10.3.0-blue?logo=lighthouse" />
+        <img src="https://img.shields.io/badge/Lighthouse-10.3.0-blue?logo=lighthouse" />
     </a><br>
     <img src="https://img.shields.io/badge/Latest%20release-v1.0.0-blue" />
     <img src="https://img.shields.io/github/repo-size/AlessioPoggi99/Wordle-ita" alt="repo-size" />
-    <img src="https://img.shields.io/badge/License-MIT-blue" />
+    <a title="Check it out" target="_blank" href="https://github.com/AlessioPoggi99/Wordle-ita/blob/main/LICENSE.md">
+        <img src="https://img.shields.io/badge/License-MIT-blue" />
+    </a>
   </div>
   <h1></h1>
 </div>
@@ -57,7 +59,8 @@ You can try this unofficial version of Wordle on the website:
 Otherwise you can clone the <a href="https://github.com/AlessioPoggi99/Wordle-ita" target="_blank">Github repository</a> and run it on your pc
 ```sh
 yarn
-yarn dev
+yarn dev # run a local hosting server
+npm run deploy # deploy to github pages
 ```
 
 
