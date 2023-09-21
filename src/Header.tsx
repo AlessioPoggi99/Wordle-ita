@@ -9,6 +9,7 @@ export default function Header() {
         <header className="flex justify-between items-center border-b border-zinc-400 dark:border-zinc-600 py-4">
             <img 
                 role="button"
+                aria-label="open-infos"
                 src={InfoIcon}
                 alt="open infos"
                 className='w-5 h-5 cursor-pointer hover:invert duration-300'
@@ -17,6 +18,7 @@ export default function Header() {
             <h1 className="text-3xl font-extrabold text-center">Wordle-Ita</h1>
                 <img 
                 role="button"
+                aria-label="open-settings"
                 src={GearIcon}
                 alt="open settings"
                 className='w-5 h-5 cursor-pointer hover:invert duration-300'

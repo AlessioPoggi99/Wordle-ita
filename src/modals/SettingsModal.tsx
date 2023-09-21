@@ -59,6 +59,7 @@ export default function SettingsModal({ show = false, setNotification }: Setting
                     <p>Esporta/Importa statistiche</p>
                     <img 
                         role="button"
+                        aria-label="open-import-export-panel"
                         src={ImportIcon}
                         alt="open import/export panel"
                         className='w-5 h-5 cursor-pointer hover:invert duration-300'
@@ -69,6 +70,7 @@ export default function SettingsModal({ show = false, setNotification }: Setting
                     <p>Elimina statistiche</p>
                     <img 
                         role="button"
+                        aria-label="reset-statistics"
                         src={TrashIcon}
                         alt="reset statistics"
                         className='w-5 h-5 cursor-pointer hover:invert-[20%] duration-300'

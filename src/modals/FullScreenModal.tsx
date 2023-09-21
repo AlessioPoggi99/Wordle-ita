@@ -35,8 +35,9 @@ export default function FullScreenModal({ children, show, title, onClose, classN
                     <h1 className="text-xl font-extrabold text-center uppercase">{title}</h1>
                     <img
                         role="button"
+                        aria-label="close-modal"
                         src={XmarkIcon}
-                        alt='close button'
+                        alt='close modal'
                         className='absolute right-0 w-5 h-5 cursor-pointer hover:invert duration-300'
                         onClick={onClose}
                     />

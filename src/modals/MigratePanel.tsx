@@ -29,12 +29,14 @@ export const MigratePanel = ({ show = false, setMigrateModalOpen, setNotificatio
             <div className='flex flex-col gap-y-6'>
                 <div className='grid grid-cols-2 font-semibold'>
                     <button 
+                        aria-label="export-statistics-tab"
                         className={`${activeFunction == 'export' ? 'underline' : 'opacity-50'} transition-all`}
                         onClick={() => setActiveFunction('export')}
                     >
                         Esporta
                     </button>
                     <button 
+                        aria-label="import-statistics-tab"
                         className={`${activeFunction == 'import' ? 'underline' : 'opacity-50'} transition-all`}
                         onClick={() => setActiveFunction('import')}
                     >
@@ -57,6 +59,7 @@ export const MigratePanel = ({ show = false, setMigrateModalOpen, setNotificatio
                 />}
 
                 <button
+                    aria-label="copy-or-import-statistics"
                     className="font-bold text-base uppercase transition-all rounded bg-[rgb(106,170,100)] hover:bg-[rgb(80,160,90)] dark:bg-[rgb(83,141,78)] dark:hover:bg-[rgb(50,130,68)] p-3 shadow w-full text-[rgba(255,255,255,0.87)]"
                     onClick={async() => {
                         try {
