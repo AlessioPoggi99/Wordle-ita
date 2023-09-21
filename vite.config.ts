@@ -14,7 +14,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
         "short_name": "Wordle 🇮🇹",
         "name": "Wordle 🇮🇹",
         "description": "Indovina la parola nascosta in 6 tentativi. Gioca con piu' di 3000 parole italiane.",
-        "start_url": "./Wordle-ita/",
+        "start_url": "./",
         "scope": "./Wordle-ita/",
         "theme_color":"#242424",
         "background_color": "#242424",
