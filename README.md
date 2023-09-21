@@ -55,6 +55,7 @@ $PROJECT_ROOT
 
 You can try this unofficial version of Wordle on the website:
 - <a href="https://alessiopoggi99.github.io/Wordle-ita/" target="_blank">Wordle-ita 🇮🇹</a>
+  It's now possible to install the web app on your device and play <strong>OFFLINE</strong>. You can use Chrome on desktop, or adding the website to your smartphone's home page.
 
 Otherwise you can clone the <a href="https://github.com/AlessioPoggi99/Wordle-ita" target="_blank">Github repository</a> and run it on your pc
 ```sh
