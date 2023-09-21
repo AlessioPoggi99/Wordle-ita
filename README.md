@@ -1,5 +1,5 @@
 <div align='center'>
-  <h1>Wordle-ita 🇮🇹</h1>
+  <h1>🇮🇹 Wordle-ita 🇮🇹</h1>
   &nbsp;
   <img width="100%" alt="lighthouse-score" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/3e628f59-a141-4f83-88d8-45cd2c0a8f06"/>
   &nbsp;
@@ -21,13 +21,13 @@ Unofficial Italian fan-made version of <a href="https://www.nytimes.com/games/wo
 You have six attempts to guess a five-letter word, with feedback given for each guess in the form of colored tiles indicating when letters match or occupy the correct position.
 
 
-## Stack
+## 📚 Stack
 - <a href="https://vitejs.dev" target="_blank">Vite.js</a> - A local development server and used by default by Vue and for React project templates
 - <a href="https://react.dev" target="_blank">React.js</a> - A front-end JavaScript library
 - <a href="https://zustand-demo.pmnd.rs" target="_blank">Zustand</a> - A small, fast and scalable bearbones state-management solution
 
 
-## Project structure
+## 📂 Project structure
 
 ```sh
 $PROJECT_ROOT
@@ -51,7 +51,7 @@ $PROJECT_ROOT
 ```
 
 
-## How to try it
+## ▶️ How to try it
 
 You can try this unofficial version of Wordle on the website:
 - <a href="https://alessiopoggi99.github.io/Wordle-ita/" target="_blank">Wordle-ita 🇮🇹</a>
@@ -64,7 +64,7 @@ npm run deploy # deploy to github pages
 ```
 
 
-## Screenshots
+## 📷 Screenshots
 
 #### Mobile (light theme)
 
