@@ -8,7 +8,7 @@
           <img src="https://img.shields.io/badge/Lighthouse-10.3.0-blue?logo=lighthouse" />
     </a><br>
     <img src="https://img.shields.io/badge/Latest%20release-v1.0.0-blue" />
-    <img src="https://img.shields.io/github/Repo-size/AlessioPoggi99/Wordle-ita" alt="repo-size" />
+    <img src="https://img.shields.io/github/repo-size/AlessioPoggi99/Wordle-ita" alt="repo-size" />
     <img src="https://img.shields.io/badge/License-MIT-blue" />
   </div>
   <h1></h1>
