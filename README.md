@@ -1,4 +1,8 @@
-# Wordle-ita 🇮🇹
+<div align='center'>
+  <h1>Wordle-ita 🇮🇹</h1>
+    <img width="75%" alt="lighthouse-score" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/3e628f59-a141-4f83-88d8-45cd2c0a8f06"/>
+  <h1></h1>
+</div>
 
 Unofficial Italian fan-made version of <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank">Wordle</a>
 
@@ -45,13 +49,6 @@ Otherwise you can clone the <a href="https://github.com/AlessioPoggi99/Wordle-it
 yarn
 yarn dev
 ```
-
-
-## Lighthouse score
-
-<p align="center">
-  <img width="75%" alt="lighthouse-score" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/a894829f-7147-4a95-90ab-17634d9676b3">
-</p>
 
 
 ## Screenshots
