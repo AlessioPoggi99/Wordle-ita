@@ -50,7 +50,7 @@ export default function Keyboard({ onClick: onClickProps }: KeyboardProps) {
                         }
 
                         return (
-                            <button onClick={onClick} key={key + index} className={styles}>
+                            <button onClick={onClick} key={key + index} className={styles} aria-label={key ? key : 'not a button'}>
                                 {key === 'delete' ? backspace : key}
                             </button>
                         )

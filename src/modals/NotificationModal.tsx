@@ -13,7 +13,7 @@ export default function NotificationModal({ notification }: { notification?: str
     }, [notification])
 
     return (
-        <div role="modal" className='absolute h-[calc(100svh-0px)] w-full top-0 left-0 pointer-events-none z-50'>
+        <div role="alert" className='absolute h-[calc(100svh-0px)] w-full top-0 left-0 pointer-events-none z-50'>
             <div className='flex flex-col items-center mx-auto max-w-lg px-4 pt-28'>
                 <div 
                     className={`bg-[#242424] dark:bg-[#e3e3e1] text-[rgba(255,255,255,0.87)] dark:text-black duration-300
