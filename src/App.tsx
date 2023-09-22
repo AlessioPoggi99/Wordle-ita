@@ -80,7 +80,7 @@ export default function App() {
 
     /* APP TSX */
     return (
-        <div className='flex flex-col justify-between mx-auto max-w-lg px-4 h-[100svh]'>
+        <div className='flex flex-col justify-between mx-auto max-w-lg px-4 min-h-[100svh] relative'>
 
             <Header />
 
