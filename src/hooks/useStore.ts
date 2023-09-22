@@ -159,6 +159,7 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
                 winInRow: 0,
                 winInRowRecord: 0,
                 winAttemptsArr: [],
+                lastSaved: {answer: '', attempts: 0},
             })),
             importStatistics: (statistics) => {
                 try {
