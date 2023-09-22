@@ -1,7 +1,7 @@
 <div align='center'>
   <h1>🇮🇹 Wordle-ita 🇮🇹</h1>
   &nbsp;
-  <img width="100%" alt="lighthouse-score" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/3e628f59-a141-4f83-88d8-45cd2c0a8f06"/>
+  <img width="100%" alt="lighthouse-score" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/3c7f8d35-b880-4de8-9fa2-5ad2ad6bae77"/>  
   &nbsp;
   <div align="center">
     <a title="Check it out" target="_blank" href="https://github.com/GoogleChrome/lighthouse">
