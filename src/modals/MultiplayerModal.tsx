@@ -4,8 +4,8 @@ import FullScreenModal from "./FullScreenModal"
 export default function MultiplayerModal({ show = false }: {show: boolean}) {
     const modalStore = useModalStore()
 
-    const friendsList = [{ name: "Marco", status: "Ultimo accesso 4h fa"}, { name: "Luca", status: "online"}, { name: "Andrea", status: "online"}]
-    const searchList = [{ name: "Giorgio", status: "online"}]
+    //const friendsList = [{ name: "Marco", status: "Ultimo accesso 4h fa"}, { name: "Luca", status: "online"}, { name: "Andrea", status: "online"}]
+    //const searchList = [{ name: "Giorgio", status: "online"}]
 
     return (
         <FullScreenModal show={show} title="Multiplayer" onClose={() => modalStore.toggleMultiplayerModal(false)}>
@@ -56,6 +56,7 @@ export default function MultiplayerModal({ show = false }: {show: boolean}) {
 
 
 /* ICONS */
+/*
 const StatusIcon = ({ status }: { status: string }) => {
     return (
         <svg 
@@ -103,3 +104,4 @@ const AddUserIcon = () => {
         </svg>
     )
 }
+*/
