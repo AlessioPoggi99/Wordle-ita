@@ -4,27 +4,27 @@ import Panel from './Panel'
 import { copyToClipboard } from '../utils/clipboardUtils'
 import { encrypt, decrypt } from '../utils/encryptionUtils'
 
-interface MigrateModalProps {
+interface MigratePanelProps {
     show: boolean
-    setMigrateModalOpen: (isOpen: boolean) => void
+    closePanel: () => void
     setNotification: (notification: string) => void
 }
 
-export const MigratePanel = ({ show = false, setMigrateModalOpen, setNotification }: MigrateModalProps) => {
+export const MigratePanel = ({ show = false, closePanel, setNotification }: MigratePanelProps) => {
     const statisticsStore = useStatisticsStore()
 
     const [activeFunction, setActiveFunction] = useState<'export' | 'import'>('export')
     const [importText, setImportText] = useState('')
 
-    const closePanel = () => {
+    const onClose = () => {
         setImportText('')
-        setMigrateModalOpen(false)
+        closePanel()
     }
 
     return (
         <Panel 
             show={show}
-            onClose={() => closePanel()}
+            onClose={() => onClose()}
         >
             <div className='flex flex-col gap-y-6'>
                 <div className='grid grid-cols-2 font-semibold'>
@@ -46,13 +46,13 @@ export const MigratePanel = ({ show = false, setMigrateModalOpen, setNotificatio
 
                 {activeFunction == 'export' && <textarea
                     readOnly={true}
-                    rows={8}
+                    rows={10}
                     className="block w-full rounded-lg border border-zinc-300 bg-gray-50 p-2.5 text-sm dark:border-gray-600 dark:bg-zinc-700 outline-none"
                     value={encrypt(JSON.stringify(statisticsStore))}
                 />}
                 {activeFunction == 'import' && <textarea
                     readOnly={false}
-                    rows={8}
+                    rows={10}
                     className="block w-full rounded-lg border border-zinc-300 bg-gray-50 p-2.5 text-sm dark:border-gray-600 dark:bg-zinc-700 outline-none"
                     value={importText}
                     onChange={e => setImportText(e.target.value)}

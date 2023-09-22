@@ -11,6 +11,8 @@ import InfoModal from './modals/InfoModal'
 import SettingsModal from './modals/SettingsModal'
 import NotificationModal from './modals/NotificationModal'
 import { useNotification } from './hooks/useNotification'
+import { StatisticsPanel } from './modals/StatisticsPanel'
+import MultiplayerModal from './modals/MultiplayerModal'
 
 export default function App() {
     /* STORE HOOKS */
@@ -23,15 +25,13 @@ export default function App() {
     const [notification, setNotification] = useNotification()
 
     /* GUESS HOOK */
-    const [guess, setGuess, addGuessLetter] = useGuess()
+    const [guess, setGuess, addGuessLetter] = useGuess(modalStore.showGameOverModal || modalStore.showInfoModal || modalStore.showMultiplayerModal || modalStore.showSettingsModal || modalStore.showStatisticsPanel)
     const previousGuess = usePrevious(guess)
 
+    // Remove guess if reset statistics
+    useEffect(() => setGuess(''), [gameStore.answer])
+
     useEffect(() => {
-        if(gameStore.gameState != 'playing') {
-            // Don't add guess or letter if game is over
-            setGuess('')
-            return
-        }
         if (guess.length === 0 && previousGuess?.length === WORD_LENGTH) {
             // Adding guess
             const guessCheck = isValidGuess(settingsStore.hardMode, previousGuess, gameStore.currentRow, gameStore.rows)
@@ -58,7 +58,6 @@ export default function App() {
 
     /* GAME OVER & STATISTICS UPDATE */
     const winNotification = ['Genio!', 'Magnifico!', 'Impressionante!', 'Splendido!', 'Grande!', 'Buono!']
-
 
     useEffect(() => {
         if(gameStore.gameState != 'playing') {
@@ -105,7 +104,9 @@ export default function App() {
 
             <GameOverOverlay show={gameStore.gameState != 'playing'} onClick={() => modalStore.toggleGameOverModal(true)}/>
             <GameOverModal show={modalStore.showGameOverModal} />
+            <StatisticsPanel show={modalStore.showStatisticsPanel} closePanel={() => modalStore.toggleStatisticsPanel(false)} />
             <InfoModal show={modalStore.showInfoModal} />
+            <MultiplayerModal show={modalStore.showMultiplayerModal} />
             <SettingsModal show={modalStore.showSettingsModal} setNotification={setNotification} />
             <NotificationModal notification={notification} />
 

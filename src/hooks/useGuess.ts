@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { WORD_LENGTH } from "./useStore"
 
-export default function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>, (letter: string) => void] {
+export default function useGuess(isModalOpen: boolean): [string, React.Dispatch<React.SetStateAction<string>>, (letter: string) => void] {
     const [guess, setGuess] = useState('')
 
     const addGuessLetter = (letter: string) => {
@@ -28,9 +28,10 @@ export default function useGuess(): [string, React.Dispatch<React.SetStateAction
     }
     
     useEffect(() => {
+        if(isModalOpen) return
         document.addEventListener('keydown', onKeyDown);
         return () => { document.removeEventListener('keydown', onKeyDown) }
-    }, [])
+    }, [isModalOpen])
     
     return [guess, setGuess, addGuessLetter];
 }

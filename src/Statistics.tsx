@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useStatisticsStore, NUMBER_OF_GUESSES } from './hooks/useStore'
 
-export default function Statistics({ showSubtitle }: { showSubtitle: boolean }) {
+export default function Statistics({ hideBorder }: { hideBorder: boolean }) {
     const statisticsStore = useStatisticsStore()
 
     const [distribution, setDistribution] = useState<number[]>([])
@@ -28,8 +28,8 @@ export default function Statistics({ showSubtitle }: { showSubtitle: boolean }) 
 
     return (
         <>
-            <section className="flex flex-col gap-y-2 py-6 justify-center text-center border-t border-zinc-400 dark:border-zinc-600">
-                <p className={`font-bold text-base uppercase ${showSubtitle ? '' : 'hidden'}`}>STATISTICHE</p>
+            <section className={`flex flex-col gap-y-2 py-6 justify-center text-center ${hideBorder ? '' : 'border-t'} border-zinc-400 dark:border-zinc-600`}>
+                <p className="font-bold text-base uppercase">STATISTICHE</p>
                 <div className='grid grid-cols-4 justify-center items-start'>
                     <div className='flex flex-col justify-center items-center'>
                         <h1 className='font-bold text-4xl'>{statisticsStore.matches}</h1>
@@ -52,7 +52,7 @@ export default function Statistics({ showSubtitle }: { showSubtitle: boolean }) 
                 </div>
             </section>
 
-            <section className='w-full flex flex-col pb-6 gap-y-2 justify-center text-center border-b border-zinc-400 dark:border-zinc-600'>
+            <section className={`w-full flex flex-col pb-6 gap-y-2 justify-center text-center ${hideBorder ? '' : 'border-b'} border-zinc-400 dark:border-zinc-600`}>
                 <p className='font-bold text-base uppercase'>distribuzione tentativi</p>
                 <div className='flex flex-col gap-y-1'>
                     {percentages.map((value, index) => (

@@ -22,7 +22,7 @@ export const GameOverModal = ({ show = false }: {show: boolean}) => {
                 />
             </section>
             
-            <Statistics showSubtitle={true} />
+            <Statistics hideBorder={false} />
 
             <button
                 aria-label="new-game"

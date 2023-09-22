@@ -36,9 +36,13 @@ type ModalStoreState = {
     showGameOverModal: boolean
     showSettingsModal: boolean
     showInfoModal: boolean
+    showMultiplayerModal: boolean
+    showStatisticsPanel: boolean
     toggleGameOverModal: (showGameOverModal: boolean) => void
     toggleSettingsModal: (showSettingsModal: boolean) => void
     toggleInfoModal: (showInfoModal: boolean) => void
+    toggleMultiplayerModal: (showMultiplayerModal: boolean) => void
+    toggleStatisticsPanel: (showStatisticsPanel: boolean) => void
 }
 
 type SettingsStoreState = {
@@ -187,10 +191,13 @@ export const useModalStore = create<ModalStoreState>()(
         showGameOverModal: false,
         showSettingsModal: false,
         showInfoModal: false,
-        showStatisticsModal: false,
+        showMultiplayerModal: false,
+        showStatisticsPanel: false,
         toggleGameOverModal: (showGameOverModal) => set(() => ({ showGameOverModal })),
         toggleSettingsModal: (showSettingsModal) => set(() => ({ showSettingsModal })),
         toggleInfoModal: (showInfoModal) => set(() => ({ showInfoModal })),
+        toggleMultiplayerModal: (showMultiplayerModal) => set(() => ({ showMultiplayerModal })),
+        toggleStatisticsPanel: (showStatisticsPanel) => set(() => ({ showStatisticsPanel })),
     }),
 )
 

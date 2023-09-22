@@ -23,6 +23,8 @@ export default {
         flipout: 'flipout 250ms ease-in',
         slidein: 'slidein 200ms',
         slideout: 'slideout 200ms',
+        opacityin: 'opacityin 200ms',
+        opacityout: 'opacityout 200ms',
       },
       keyframes: {
         vibration: {
@@ -59,6 +61,14 @@ export default {
           '0%': { transform: 'translateY(0px)', opacity: '1' },
           '90%': { opacity: '0' },
           '100%': { transform: 'translateY(60px)', opacity: '0' },
+        },
+        opacityin: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        opacityout: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
         },
       },
     },
