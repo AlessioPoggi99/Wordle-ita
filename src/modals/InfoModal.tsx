@@ -41,7 +41,7 @@ export default function InfoModal({ show = false }: {show: boolean}) {
                     <p>Nessuna di queste lettere è corretta</p>
                 </div>
             </section>
-            <section className="mt-4 flex flex-col gap-y-1">
+            <section className="my-4 flex flex-col gap-y-1">
                 <p className="font-bold mb-1 animate-[vibration_600ms]">⚡️ NOVITÀ ⚡️</p>
                 <div className="ml-6 flex gap-x-2">
                     <p>➤</p>

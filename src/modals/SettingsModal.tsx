@@ -56,7 +56,7 @@ export default function SettingsModal({ show = false, setNotification }: Setting
                     />
                 </div>
                 <div className="flex justify-between items-center pb-4 border-b border-zinc-400 dark:border-zinc-600">
-                    <p>Esporta/Importa statistiche</p>
+                    <p>Trasferisci statistiche</p>
                     <img 
                         role="button"
                         aria-label="open-import-export-panel"

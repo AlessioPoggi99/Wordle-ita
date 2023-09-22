@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useStatisticsStore } from './hooks/useStore'
+import { useStatisticsStore, NUMBER_OF_GUESSES } from './hooks/useStore'
 
 export default function Statistics({ showSubtitle }: { showSubtitle: boolean }) {
     const statisticsStore = useStatisticsStore()
@@ -8,8 +8,8 @@ export default function Statistics({ showSubtitle }: { showSubtitle: boolean }) 
     const [percentages, setPercentages] = useState<number[]>([])
 
     useEffect(() => {
-        const distribution = Array(6).fill(0)
-        const percentages = Array(6).fill(0)
+        const distribution = Array(NUMBER_OF_GUESSES).fill(0)
+        const percentages = Array(NUMBER_OF_GUESSES).fill(0)
         const winAttemptsArr = statisticsStore.winAttemptsArr
 
         winAttemptsArr.forEach(attempt => {
