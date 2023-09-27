@@ -1,9 +1,29 @@
 import { create } from "zustand"
-import { persist, createJSONStorage } from "zustand/middleware"
+import { persist, createJSONStorage, StateStorage } from "zustand/middleware"
 import { getRandomWord, LetterState } from '../utils/wordUtils'
+import { encrypt, decrypt } from '../utils/encryptionUtils'
 
 export const NUMBER_OF_GUESSES = 6;
 export const WORD_LENGTH = 5;
+
+// Custom storage object
+const encryptedStorage: StateStorage = {
+    getItem: async (name: string): Promise<string | null> => {
+        const item = localStorage.getItem(name)
+        if(item) {
+            const decryptedItem = decrypt(item)
+            if(decryptedItem) return JSON.parse(decryptedItem)
+        }
+        return item
+    },
+    setItem: async (name: string, value: string): Promise<void> => {
+        const encryptedItem = encrypt(JSON.stringify(value))
+        localStorage.setItem(name, encryptedItem)
+    },
+    removeItem: async (name: string): Promise<void> => {
+        localStorage.removeItem(name)
+    },
+}
 
 export interface GuessRow {
     guess: string
@@ -127,7 +147,7 @@ export const useGameStore = create<GameStoreState>()(
 		}),
 		{
 			name: 'wordle-game-storage', // unique name
-			storage: createJSONStorage(() => localStorage),
+			storage: createJSONStorage(() => encryptedStorage),
 		}
 	)
 )
@@ -182,7 +202,7 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
 		}),
 		{
 			name: 'wordle-statistics-storage', // unique name
-			storage: createJSONStorage(() => localStorage),
+			storage: createJSONStorage(() => encryptedStorage),
             version: 1,
             migrate: (persistedState): StatisticsStoreState => {
 
@@ -235,6 +255,6 @@ export const useSettingsStore = create<SettingsStoreState>()(
     }),
     {
         name: 'wordle-settings-storage', // unique name
-        storage: createJSONStorage(() => localStorage),
+        storage: createJSONStorage(() => encryptedStorage),
     }
 ))
