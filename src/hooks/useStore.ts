@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { persist, createJSONStorage } from "zustand/middleware"
-import { getRandomWord, LetterState } from '../utils/wordUtils';
+import { getRandomWord, LetterState } from '../utils/wordUtils'
 
 export const NUMBER_OF_GUESSES = 6;
 export const WORD_LENGTH = 5;
@@ -26,8 +26,8 @@ interface StatisticsStoreState {
     winInRow: number
     winInRowRecord: number
     winAttemptsArr: number[]
-    lastSaved: {answer: string, attempts: number}
-    addMatch(answer: string, isWin: boolean, attempts: number): void
+    lastSaved: {answer: string, attempts: number, date: number}
+    addMatch(answer: string, isWin: boolean, attempts: number, date: number): void
     resetStatistics(): void
     importStatistics(statistics: string): boolean
 }
@@ -139,9 +139,9 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
             wins: 0,
             winInRow: 0,
             winInRowRecord: 0,
-            winAttemptsArr: [],
-            lastSaved: {answer: '', attempts: 0},
-            addMatch: (answer, isWin, attempts) => set((state) => ({ 
+            winAttemptsArr: Array(NUMBER_OF_GUESSES).fill(0),
+            lastSaved: {answer: '', attempts: 0, date: 0},
+            addMatch: (answer, isWin, attempts, date) => set((state) => ({ 
                 matches: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) ? state.matches + 1 : state.matches,
                 wins: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? state.wins + 1 : state.wins,
                 winInRowRecord: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? (
@@ -150,16 +150,16 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
                     state.winInRowRecord < state.winInRow ? state.winInRow : state.winInRowRecord
                 ),
                 winInRow: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) ? isWin ? state.winInRow + 1 : 0 : state.winInRow,
-                winAttemptsArr: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? [...state.winAttemptsArr, attempts] : state.winAttemptsArr,
-                lastSaved: {answer, attempts},
+                winAttemptsArr: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? state.winAttemptsArr.map((v, i) => i == attempts-1 ? v + 1 : v) : state.winAttemptsArr,
+                lastSaved: {answer, attempts, date},
             })),
             resetStatistics: () => set(() => ({ 
                 matches: 0,
                 wins: 0,
                 winInRow: 0,
                 winInRowRecord: 0,
-                winAttemptsArr: [],
-                lastSaved: {answer: '', attempts: 0},
+                winAttemptsArr: Array(NUMBER_OF_GUESSES).fill(0),
+                lastSaved: {answer: '', attempts: 0, date: 0},
             })),
             importStatistics: (statistics) => {
                 try {

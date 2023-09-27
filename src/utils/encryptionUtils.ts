@@ -1,7 +1,7 @@
 import { Blowfish } from 'egoroof-blowfish'
 
-const BLOWFISH_KEY = 'mGCtY1sk,7qRaLaF*qgdAUE&xcT8?,'
-const BLOWFISH_IV = 'ZSkxgZ#p'
+const BLOWFISH_KEY = import.meta.env.VITE_BLOWFISH_KEY
+const BLOWFISH_IV = import.meta.env.VITE_BLOWFISH_IV
 
 const bf = new Blowfish(BLOWFISH_KEY, Blowfish.MODE.ECB, Blowfish.PADDING.NULL)
 bf.setIv(BLOWFISH_IV)

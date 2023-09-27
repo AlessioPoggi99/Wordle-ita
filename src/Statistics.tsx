@@ -8,13 +8,8 @@ export default function Statistics({ hideBorder }: { hideBorder: boolean }) {
     const [percentages, setPercentages] = useState<number[]>([])
 
     useEffect(() => {
-        const distribution = Array(NUMBER_OF_GUESSES).fill(0)
+        const distribution = statisticsStore.winAttemptsArr
         const percentages = Array(NUMBER_OF_GUESSES).fill(0)
-        const winAttemptsArr = statisticsStore.winAttemptsArr
-
-        winAttemptsArr.forEach(attempt => {
-            distribution[attempt-1] += 1
-        })
 
         const max = Math.max(...distribution)
 

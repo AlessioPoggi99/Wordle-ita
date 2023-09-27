@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useGameStore, useStatisticsStore, useModalStore, WORD_LENGTH, useSettingsStore } from './hooks/useStore'
 import useGuess from './hooks/useGuess'
@@ -63,7 +64,7 @@ export default function App() {
         if(gameStore.gameState != 'playing') {
             const isWin = gameStore.gameState == 'won' ? true : false
             const attempts = isWin ? gameStore.currentRow : -1
-            statisticsStore.addMatch(gameStore.answer, isWin, attempts)
+            statisticsStore.addMatch(gameStore.answer, isWin, attempts, Date.now())
 
             const timer1: ReturnType<typeof setTimeout> = setTimeout(() => {
                 setNotification(isWin ? winNotification[gameStore.currentRow - 1] : gameStore.answer.toUpperCase())
