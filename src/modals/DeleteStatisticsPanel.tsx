@@ -18,7 +18,7 @@ export const DeleteStatisticsPanel = ({ show = false, closePanel, setNotificatio
             show={show}
             onClose={closePanel}
         >
-            <div className='flex flex-col text-justify mt-1 border-b border-zinc-400 dark:border-zinc-600 pb-4 gap-y-2'>
+            <div className='flex flex-col mt-1 border-b border-zinc-400 dark:border-zinc-600 pb-4 gap-y-2'>
                 <p>Sei sicuro di voler eleminare definitivamente le tue statistiche?</p>
                 <p><strong>ATTENZIONE:</strong>&nbsp;Questa operazione non è reversibile</p>
             </div>
