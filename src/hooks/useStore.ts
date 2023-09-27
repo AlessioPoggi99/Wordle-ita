@@ -183,13 +183,14 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
 		{
 			name: 'wordle-statistics-storage', // unique name
 			storage: createJSONStorage(() => localStorage),
+            version: 1,
             migrate: (persistedState): StatisticsStoreState => {
 
                 const ps = persistedState as StatisticsStoreState
 
                 const newArr = Array(NUMBER_OF_GUESSES).fill(0)
                 ps.winAttemptsArr.forEach((att: number) => {
-                    newArr[att-1] =  newArr[att-1] + 1
+                    if(att > 0 && att < 7) newArr[att-1] =  newArr[att-1] + 1
                 })
 
                 return {
