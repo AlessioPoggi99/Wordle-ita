@@ -189,9 +189,7 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
 
                 const newArr = Array(NUMBER_OF_GUESSES).fill(0)
                 ps.winAttemptsArr.forEach((att: number) => {
-                    try {
-                        newArr[att-1] =  newArr[att-1] + 1
-                    } catch (error) { /* empty */ }
+                    newArr[att-1] =  newArr[att-1] + 1
                 })
 
                 return {
@@ -201,6 +199,9 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
                     winInRowRecord: ps.winInRowRecord,
                     winAttemptsArr: newArr,
                     lastSaved: {answer: ps.lastSaved.answer, attempts: ps.lastSaved.attempts, date: 0},
+                    addMatch: ps.addMatch,
+                    resetStatistics: ps.resetStatistics,
+                    importStatistics: ps.importStatistics,
                 }
             },
 		}
