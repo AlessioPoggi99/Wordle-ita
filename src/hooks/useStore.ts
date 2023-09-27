@@ -183,22 +183,24 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
 		{
 			name: 'wordle-statistics-storage', // unique name
 			storage: createJSONStorage(() => localStorage),
-            migrate: (persistedState) => {
+            migrate: (persistedState): StatisticsStoreState => {
 
-                let newArr = Array(NUMBER_OF_GUESSES).fill(0)
-                persistedState.winAttemptsArr.forEach((att: number) => {
+                const ps = persistedState as StatisticsStoreState
+
+                const newArr = Array(NUMBER_OF_GUESSES).fill(0)
+                ps.winAttemptsArr.forEach((att: number) => {
                     try {
                         newArr[att-1] =  newArr[att-1] + 1
-                    } catch (error) {}
+                    } catch (error) { /* empty */ }
                 })
 
                 return {
-                    matches: persistedState.matches,
-                    wins: persistedState.wins,
-                    winInRow: persistedState.winInRow,
-                    winInRowRecord: persistedState.winInRowRecord,
+                    matches: ps.matches,
+                    wins: ps.wins,
+                    winInRow: ps.winInRow,
+                    winInRowRecord: ps.winInRowRecord,
                     winAttemptsArr: newArr,
-                    lastSaved: {answer: persistedState.lastSaved.answer, attempts: persistedState.lastSaved.attempts, date: 0},
+                    lastSaved: {answer: ps.lastSaved.answer, attempts: ps.lastSaved.attempts, date: 0},
                 }
             },
 		}
