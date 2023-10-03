@@ -37,7 +37,7 @@ interface GameStoreState {
     gameState: 'playing' | 'won' | 'lost'
     keyboardLetterState: { [letter: string]: LetterState }
     updateRow(row: GuessRow): void
-    newGame(initialGuess?: GuessRow[]): void
+    newGame(initialGuess?: GuessRow[], answer?: string): void
 }
 
 interface StatisticsStoreState {
@@ -132,13 +132,13 @@ export const useGameStore = create<GameStoreState>()(
                     keyboardLetterState: keyboardLetterState,
                 })
             },
-            newGame: (initialRows = []) => {
+            newGame: (initialRows = [], answer = undefined) => {
                 const rowsToAdd = NUMBER_OF_GUESSES - initialRows.length
                 initialRows = initialRows.concat(Array(rowsToAdd).fill(''))
 
                 set({
                     gameState: 'playing',
-                    answer: getRandomWord(),
+                    answer: answer ? answer : getRandomWord(),
                     rows: initialRows,
                     currentRow: 0,
                     keyboardLetterState: {},
