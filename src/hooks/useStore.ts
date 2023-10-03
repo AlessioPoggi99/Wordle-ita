@@ -160,7 +160,7 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
             winInRow: 0,
             winInRowRecord: 0,
             winAttemptsArr: Array(NUMBER_OF_GUESSES).fill(0),
-            lastSaved: {answer: '', attempts: 0, date: 0},
+            lastSaved: {answer: '', attempts: 0, date: Date.now()},
             addMatch: (answer, isWin, attempts, date) => set((state) => ({ 
                 matches: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) ? state.matches + 1 : state.matches,
                 wins: !(answer == state.lastSaved.answer && attempts == state.lastSaved.attempts) && isWin ? state.wins + 1 : state.wins,
@@ -179,7 +179,7 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
                 winInRow: 0,
                 winInRowRecord: 0,
                 winAttemptsArr: Array(NUMBER_OF_GUESSES).fill(0),
-                lastSaved: {answer: '', attempts: 0, date: 0},
+                lastSaved: {answer: '', attempts: 0, date: Date.now()},
             })),
             importStatistics: (statistics) => {
                 try {
@@ -203,28 +203,7 @@ export const useStatisticsStore = create<StatisticsStoreState>()(
 		{
 			name: 'wordle-statistics-storage', // unique name
 			storage: createJSONStorage(() => encryptedStorage),
-            version: 1,
-            migrate: (persistedState): StatisticsStoreState => {
-
-                const ps = persistedState as StatisticsStoreState
-
-                const newArr = Array(NUMBER_OF_GUESSES).fill(0)
-                ps.winAttemptsArr.forEach((att: number) => {
-                    if(att > 0 && att < 7) newArr[att-1] =  newArr[att-1] + 1
-                })
-
-                return {
-                    matches: ps.matches,
-                    wins: ps.wins,
-                    winInRow: ps.winInRow,
-                    winInRowRecord: ps.winInRowRecord,
-                    winAttemptsArr: newArr,
-                    lastSaved: {answer: ps.lastSaved.answer, attempts: ps.lastSaved.attempts, date: 0},
-                    addMatch: ps.addMatch,
-                    resetStatistics: ps.resetStatistics,
-                    importStatistics: ps.importStatistics,
-                }
-            },
+            version: 1
 		}
 	)
 )
