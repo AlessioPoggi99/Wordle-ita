@@ -87,3 +87,9 @@ npm run deploy # deploy to github pages
   <img width="49%" alt="desktop-info" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/8d8a1e3f-cb10-4d28-a74e-2349a0bed39f">
   <img width="49%" alt="desktop-settings" src="https://github.com/AlessioPoggi99/Wordle-ita/assets/80333233/eeaa13be-cb03-40c0-96f7-b1df031216b8">
 </p>
+
+## 🔗 Links
+
+- <a href="https://github.com/AlessioPoggi99" target="_blank">My Github</a>
+
+- <span><a href="https://alessiopoggi99.github.io/Wordle-ita/" target="_blank">Wordle 🇮🇹</a> and <a href="https://github.com/AlessioPoggi99/Wordle-ita/" target="_blank">Wordle github repository</a></span> (the repository is actually private).
