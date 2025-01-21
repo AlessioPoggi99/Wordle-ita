@@ -63,5 +63,6 @@ const pwaOptions: Partial<VitePWAOptions> = {
 // https://vitejs.dev/config/
 export default defineConfig({
   // base: "/Wordle-ita",
+  base: "/",
   plugins: [react(), VitePWA(pwaOptions)],
 });
